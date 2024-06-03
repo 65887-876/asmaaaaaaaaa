@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    position: relative; /* Set body to relative positioning */
+}
+
+.container {
+    max-width: 1200px; /* Increased max-width for better spacing */
+    margin: 20px auto;
+    padding: 20px;
+    display: flex; /* Use flexbox to align items */
+    justify-content: center; /* Center the form horizontally */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%; /* Adjusted width for the form */
+}
+
+.form-group {
+    padding: 10px;
+    border-radius: 5px; /* Added border-radius for container */
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Align items vertically */
+}
+
+.form-group:nth-child(odd) {
+    background-color: #f4f4f4; /* Grey background for odd-numbered containers */
+}
+
+.form-group:nth-child(even) {
+    background-color: #fff; /* White background for even-numbered containers */
+}
+
+label {
+    flex: 1; /* Allow the label to grow and take available space */
+    margin-right: 20px; /* Added margin for spacing between label and input */
+    color: #333;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    flex: 3; /* Allow the input to grow and take available space */
+    width: calc(100% - 24px); /* Adjusted width for better alignment */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #fff; /* Set input background color to white */
+}
+
+textarea {
+    height: 100px;
+}
+
+select {
+    appearance: none;
+}
+
+/* Styles for file upload */
+.file-upload {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.file-upload input[type="file"] {
+    width: 71%;
+    margin-left: 25px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.line {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

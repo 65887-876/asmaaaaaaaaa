@@ -1,0 +1,58 @@
+/* Add the existing styles */
+.add-house-card {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Vertical alignment */
+    justify-content: center; /* Center align */
+    align-items: center; /* Center align */
+    border: 2px dashed #ccc; /* Dashed border to indicate adding */
+    border-radius: 10px; /* Rounded corners */
+    background: #f9f9f9; /* Light background */
+    height: 200px; /* Fixed height */
+    cursor: pointer; /* Indicate clickability */
+    transition: background 0.3s; /* Smooth transition on hover */
+}
+
+.add-house-card:hover {
+    background: #e0e0e0; /* Darker background on hover */
+}
+
+.plus-sign {
+    font-size: 3rem; /* Large font for the plus sign */
+    color: #555; /* Dark gray color */
+}
+
+.add-house-card a {
+    text-decoration: none; /* No underline */
+    color: #333; /* Text color */
+    text-align: center; /* Center align */
+}
+
+/* New styles for the delete button */
+.delete-btn {
+    background-color: #ff4c4c; /* Red background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 5px 10px; /* Small padding */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 0.8rem; /* Small font size */
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+.delete-btn:hover {
+    background-color: #ff1a1a; /* Darker red on hover */
+}
+.edit-btn {
+    background: #007bff; /* Blue background for edit button */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Smaller padding for a smaller button */
+    cursor: pointer; /* Indicate clickability */
+    font-size: 0.875rem; /* Slightly smaller font size */
+    transition: background-color 0.2s; /* Smooth transition */
+}
+
+.edit-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

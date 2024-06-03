@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif; /* Default font family */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background: #f0f0f0; /* Light gray background */
+}
+
+.about-section {
+    width: 100%; /* Full screen width */
+    padding: 60px; /* Adequate padding */
+    background: white; /* White background */
+    border-radius: 10px; /* Rounded corners for smooth edges */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+h1 {
+    font-size: 2.5rem; /* Large font size for the main heading */
+    color: #333; /* Dark gray color */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+h2 {
+    font-size: 2rem; /* Slightly smaller font for subheadings */
+    color: #444; /* Dark gray color */
+    margin-bottom: 20px; /* Space below subheadings */
+}
+
+p {
+    font-size: 1.2rem; /* Standard paragraph font size */
+    color: #555; /* Slightly lighter gray */
+    line-height: 1.6; /* Improved line-height for readability */
+    margin-bottom: 20px; /* Space below paragraphs */
+}
+
+a {
+    color: #007bff; /* Blue for links */
+    text-decoration: none; /* No underline */
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover for links */
+}
+
+.company-overview,
+.mission-statement,
+.team-introduction,
+.contact-information {
+    margin-bottom: 40px; /* Space between sections */
+}
+
+@media (max-width: 768px) { /* Styles for smaller screens */
+    .about-section {
+        padding: 30px; /* Less padding for smaller screens */
+    }
+}
