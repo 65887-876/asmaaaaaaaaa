@@ -16,25 +16,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             if ($user_data["password"] == $password) {
                 $_SESSION['user_id'] = $user_data['user_id'];
-                $_SESSION['is_admin'] = $user_data['is_admin'];  // Set admin session variable
+                $_SESSION['is_admin'] = $user_data['is_admin'];  // Définir la variable de session administrateur
                 header("Location: index.php");
                 die;
             } else {
-                echo 'Invalid password';
+                echo 'Mot de passe incorrect';
             }
         } else {
-            echo 'User not found';
+            echo 'Utilisateur non trouvé';
         }
     } else {
-        echo 'Please enter valid information';
+        echo 'Veuillez saisir des informations valides';
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <title>Login Page</title>
+    <title>Page de connexion</title>
     <link rel="stylesheet" type="text/css" href="styles/login.css">
     <style>
         body {
@@ -106,16 +106,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </style>
 </head>
 <body>
-    <h2>Login</h2>
+    <h2>Connexion</h2>
     <form action="login.php" method="POST"> 
-        <label for="username">Username or Email:</label>
+        <label for="username">Nom d'utilisateur ou E-Mail:</label>
         <input type="text" name="username" required>
 
-        <label for="password">Password:</label>
+        <label for="password">Mot de Passe:</label>
         <input type="password" name="password" required>
 
-        <button type="submit">Login</button>
+        <button type="submit">Connexion</button>
     </form>
-    <p>Don't have an account? <a href="signup.php">Signup here</a>.</p>
+    <p>Vous n'avez pas de compte? <a href="signup.php">Inscrivez-vous ici</a>.</p>
 </body>
 </html>

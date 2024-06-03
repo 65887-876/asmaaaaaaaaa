@@ -20,54 +20,51 @@ if (!$home) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['delete'])) {
-        // Delete home and its images
-        $delete_query = "DELETE FROM homes WHERE id = '$home_id' AND user_id = '$user_id'";
-        if (mysqli_query($con, $delete_query)) {
-            // Delete images from server
-            $media = json_decode($home['media']);
-            foreach ($media as $file_path) {
-                unlink($file_path);
-            }
-            header("Location: index.php");
-            die;
-        } else {
-            echo "Database error: " . mysqli_error($con);
-        }
-    } else {
-        // Update home details
-        $title = $_POST['title']; 
-        $description = $_POST['description']; 
-        $price = $_POST['price'];
-        $media_paths = $home['media'] ? json_decode($home['media']) : [];
+    $title = isset($_POST['title']) ? $_POST['title'] : '';
+    $description = isset($_POST['description']) ? $_POST['description'] : '';
+    $price = isset($_POST['price']) ? $_POST['price'] : '';
+    $media_paths = $home['media'] ? json_decode($home['media'], true) : [];
 
-        // Process uploaded images
-        if (!empty($_FILES['media']['name'])) {
-            $allowed_extensions = ["jpg", "jpeg", "png", "gif"];
-            foreach ($_FILES['media']['name'] as $key => $name) {
-                if ($_FILES['media']['error'][$key] === UPLOAD_ERR_OK) {
-                    $file_extension = pathinfo($name, PATHINFO_EXTENSION);
-                    if (in_array(strtolower($file_extension), $allowed_extensions)) {
-                        $unique_filename = uniqid() . '.' . $file_extension;
-                        $file_path = 'uploads/' . $unique_filename;
-                        if (move_uploaded_file($_FILES['media']['tmp_name'][$key], $file_path)) {
-                            // Delete previous image
-                            if (!empty($media_paths[$key])) {
-                                unlink($media_paths[$key]);
-                            }
-                            $media_paths[$key] = $file_path;
-                        } else {
-                            echo "Error moving the uploaded file.";
-                        }
+    // Handle image deletion
+    if (isset($_POST['delete_image'])) {
+        $delete_indices = $_POST['delete_image']; // Get the indices of the images to delete
+        foreach ($delete_indices as $index) {
+            if (isset($media_paths[$index])) {
+                if (file_exists($media_paths[$index])) { // Check if the file exists before unlinking
+                    unlink($media_paths[$index]); // Remove the image file from the server
+                }
+                unset($media_paths[$index]); // Remove the image path from the array
+            }
+        }
+    }
+
+    // Process uploaded images
+    if (!empty($_FILES['media']['name'])) {
+        $allowed_extensions = ["jpg", "jpeg", "png", "gif"];
+        foreach ($_FILES['media']['name'] as $key => $name) {
+            if ($_FILES['media']['error'][$key] === UPLOAD_ERR_OK) {
+                $file_extension = pathinfo($name, PATHINFO_EXTENSION);
+                if (in_array(strtolower($file_extension), $allowed_extensions)) {
+                    $unique_filename = uniqid() . '.' . $file_extension;
+                    $file_path = 'uploads/' . $unique_filename;
+                    if (move_uploaded_file($_FILES['media']['tmp_name'][$key], $file_path)) {
+                        $media_paths[] = $file_path;
                     } else {
-                        echo "Invalid file type. Please upload a JPG, JPEG, PNG, or GIF image.";
+                        echo "Error moving the uploaded file.";
                     }
+                } else {
+                    echo "Invalid file type. Please upload a JPG, JPEG, PNG, or GIF image.";
                 }
             }
         }
+    }
 
-        // Update home details in database
-        if (!empty($title) && !empty($description) && !empty($price)) {
+    // Update home details in database
+    if (!empty($title) && !empty($description) && !empty($price)) {
+        // Check if there are any photos
+        if (empty($media_paths)) {
+            echo "Veuillez télécharger au moins une photo.";
+        } else {
             $media_paths_json = json_encode($media_paths);
             $update_query = "UPDATE homes SET title = ?, description = ?, price = ?, media = ? WHERE id = ? AND user_id = ?";
             if ($stmt = mysqli_prepare($con, $update_query)) {
@@ -82,13 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             } else {
                 echo "Database error: " . mysqli_error($con);
             }
-        } else {
-            echo "Please enter a valid title, description, and price.";
         }
+    } else {
+        echo "Veuillez saisir un titre, une description, et un prix valides.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,27 +168,30 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     
     <form action="edit_home.php?home_id=<?php echo htmlspecialchars($home_id); ?>" method="POST" enctype="multipart/form-data">
         <label for="title">Title:</label>
-        <input type="text" name="title" value="<?php echo htmlspecialchars($home['title']); ?>" required><br> 
+        <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required><br> 
         
         <label for="description">Description:</label>
-        <textarea name="description" required><?php echo htmlspecialchars($home['description']); ?></textarea><br>
+        <textarea name="description" required><?php echo isset($home['description']) ? htmlspecialchars($home['description']) : ''; ?></textarea><br>
         
         <label for="price">Price:</label>
-        <input type="text" name="price" value="<?php echo htmlspecialchars($home['price']); ?>" required><br>
+        <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required><br>
 
         <label for="media">Photos (up to 6):</label>
         <input type="file" name="media[]" multiple accept="image/*"><br>
 
         <?php if (!empty($home['media'])): ?>
             <label>Current Photos:</label><br>
-            <?php $media_paths = json_decode($home['media']); ?>
-            <?php foreach ($media_paths as $path): ?>
-                <img src="<?php echo htmlspecialchars($path); ?>" alt="Current Image" style="max-width: 100px;"><br>
+            <?php $media_paths = json_decode($home['media'], true); ?>
+            <?php foreach ($media_paths as $key => $path): ?>
+                <input type="hidden" name="existing_media[]" value="<?php echo $path; ?>">
+                <div class="image-container">
+                    <img src="<?php echo htmlspecialchars($path); ?>" alt="Current Image" style="max-width: 100px;"><br>
+                    <input type="checkbox" name="delete_image[]" value="<?php echo $key; ?>"> Delete
+                </div>
             <?php endforeach; ?>
         <?php endif; ?>
-        <div class="risk">
 
-        
+        <div class="risk">
             <button type="submit">Update Home</button>
             <button type="submit" name="delete" onclick="return confirm('Are you sure you want to delete this home?')">Delete Home</button>
         </div>
