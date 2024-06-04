@@ -77,18 +77,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <label for="title">Type d'Annonce:</label>
             <input type="text" name="title" required>
         </div>
-
-        <div class="form-group">
-            <label for="price">Prix :</label>
-            <input type="text" name="price" required>
-            <select name="price_period" required>
+        <div style="display:flex; justify-content:start;">
+            <select name="price_period" >
                 <option value="" disabled selected hidden>Sélectionnez une période</option>
                 <option value="total">Total</option>
                 <option value="par mois">Par mois</option>
                 <option value="par ans">Par an</option>
             </select>
         </div>
-        
+        <div class="form-group">
+            <label for="price">Prix :</label>
+            <input type="text" name="price" required>
+
+        </div>
+
         <div class="form-group">
             <label for="address">Adresse :</label>
             <input type="text" name="address" required>

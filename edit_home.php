@@ -123,6 +123,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required>
         </div>
     </div>
+    <div class="form-group">
+        <label for="address">Adresse :</label>
+        <div class="input-container">
+            <input type="text" name="address" value="<?php echo isset($home['address']) ? htmlspecialchars($home['address']) : ''; ?>" required>
+        </div>
+    </div>
 
     <div class="form-group">
         <label for="media">Photos (jusqu'à 6) :</label>
@@ -146,12 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </div>
     <?php endif; ?>
 
-    <div class="form-group">
-        <label for="address">Adresse :</label>
-        <div class="input-container">
-            <input type="text" name="address" value="<?php echo isset($home['address']) ? htmlspecialchars($home['address']) : ''; ?>" required>
-        </div>
-    </div>
+
 
     <div class="form-group">
         <label for="description">Description :</label>
