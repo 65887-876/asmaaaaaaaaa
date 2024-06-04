@@ -20,10 +20,13 @@ if (!$home) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $title = isset($_POST['title']) ? $_POST['title'] : '';
-    $description = isset($_POST['description']) ? $_POST['description'] : '';
-    $price = isset($_POST['price']) ? $_POST['price'] : '';
-    $address = isset($_POST['address']) ? $_POST['address'] : '';
+    $title = $_POST['title'] ?? '';
+    $description = $_POST['description'] ?? '';
+    $price_period = $_POST['price_period'] ?? '';
+    $type = $_POST['type'] ?? '';
+
+    $price = $_POST['price'] ?? '';
+    $address = $_POST['address'] ?? '';
     $media_paths = $home['media'] ? json_decode($home['media'], true) : [];
 
     // Handle image deletion
@@ -40,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     // Process uploaded images
-    if (!empty($_FILES['media']['name'])) {
+    if (!empty($_FILES['media']['name'][0])) {
         $allowed_extensions = ["jpg", "jpeg", "png", "gif"];
         foreach ($_FILES['media']['name'] as $key => $name) {
             if ($_FILES['media']['error'][$key] === UPLOAD_ERR_OK) {
@@ -62,14 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Update home details in database
     if (!empty($title) && !empty($description) && !empty($price) && !empty($address)) {
-        // Check if there are any photos
         if (empty($media_paths)) {
             echo "Veuillez télécharger au moins une photo.";
         } else {
             $media_paths_json = json_encode($media_paths);
-            $update_query = "UPDATE homes SET title = ?, description = ?, price = ?, media = ?, address = ? WHERE id = ? AND user_id = ?";
+            $update_query = "UPDATE homes SET title = ?, description = ?, price = ?, type = ?, price_period = ?, media = ?, address = ? WHERE id = ? AND user_id = ?";
             if ($stmt = mysqli_prepare($con, $update_query)) {
-                mysqli_stmt_bind_param($stmt, "ssssssi", $title, $description, $price, $media_paths_json, $address, $home_id, $user_id);
+                mysqli_stmt_bind_param($stmt, "ssssssssi", $title, $description, $price, $type, $price_period, $media_paths_json, $address, $home_id, $user_id);
                 if (mysqli_stmt_execute($stmt)) {
                     header("Location: index.php");
                     die;
@@ -116,7 +118,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required>
         </div>
     </div>
-
+    <div style="display:flex; justify-content:start;">
+            <select name="price_period" >
+                <option value="" disabled selected hidden>Sélectionnez une période</option>
+                <option value="total">Total</option>
+                <option value="par mois">Par mois</option>
+                <option value="par ans">Par an</option>
+            </select>
+        </div>
     <div class="form-group">
         <label for="price">Prix :</label>
         <div class="input-container">
@@ -129,13 +138,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input type="text" name="address" value="<?php echo isset($home['address']) ? htmlspecialchars($home['address']) : ''; ?>" required>
         </div>
     </div>
-
+    <div style = "display: flex; justify-content: space-between;">
+            <label for="type">Type :</label>
+            <select name="type" required>
+                <option value="" disabled selected hidden>Sélectionnez un type</option>
+                <option value="sell">À vendre</option>
+                <option value="rent">À louer</option>
+            </select>
+        </div>
     <div class="form-group">
         <label for="media">Photos (jusqu'à 6) :</label>
         <div class="input-container">
             <input type="file" name="media[]" multiple accept="image/*">
         </div>
     </div>
+
 
     <?php if (!empty($home['media'])): ?>
     <div class="form-group">
