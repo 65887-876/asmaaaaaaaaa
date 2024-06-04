@@ -20,37 +20,37 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" type="text/css" href="styles/home.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <style>
-.add-house-card {
-    background-color: #f9f9f9;
-    border: 2px dashed #ccc; /* Add a dashed border */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    width: 300px; /* Set a fixed width to match the width of other cards */
-    margin: 10px; /* Add margin to match the spacing between other cards */
-}
-.add-house-card:hover {
-    transform: scale(1.05);
-}
+        .add-house-card {
+            background-color: #f9f9f9;
+            border: 2px dashed #ccc; /* Add a dashed border */
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            width: 300px; /* Set a fixed width to match the width of other cards */
+            margin: 10px; /* Add margin to match the spacing between other cards */
+        }
+        .add-house-card:hover {
+            transform: scale(1.05);
+        }
 
-.plus-sign {
-    font-size: 48px;
-    line-height: 1;
-    margin-bottom: 10px;
-}
+        .plus-sign {
+            font-size: 48px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
 
-.add-house-card p {
-    font-size: 18px;
-    margin: 0;
-    color: #333;
-}
+        .add-house-card p {
+            font-size: 18px;
+            margin: 0;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -84,8 +84,7 @@ $result = mysqli_query($con, $query);
                             echo "</div>";
                         }
                         echo "</div>";
-                        echo "<div class='swiper-button-prev'></div>"; // Previous button
-                        echo "<div class='swiper-button-next'></div>"; // Next button
+                        // Removed the navigation buttons
                         echo "</div>";
                     }
 
@@ -126,10 +125,7 @@ $result = mysqli_query($con, $query);
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper('.swiper-container', {
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+            // Removed navigation parameters
         });
     </script>
 </body>
