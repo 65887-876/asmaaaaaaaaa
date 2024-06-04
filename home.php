@@ -56,6 +56,7 @@ $result = mysqli_query($con, $query);
                     echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN</p>";
                     echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
                     echo "<p>" . htmlspecialchars($home['description']) . "</p>";
+                    echo "<p class='address'>" . htmlspecialchars($home['address']) . "</p>";
                     echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
                     echo "</div>";
 

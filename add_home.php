@@ -38,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "Vous pouvez télécharger jusqu'à 6 fichiers.";
     }
 
-    if (!empty($title) && !empty($description) && !empty($price) && !empty($type) && !empty($media_paths)) {
+    if (!empty($title) && !empty($description) && !empty($price) && !empty($type) && !empty($address) && !empty($media_paths)) {
         $media_paths_json = json_encode($media_paths);
-        $query = "INSERT INTO homes (user_id, title, description, price, type, media, approved) VALUES (?, ?, ?, ?, ?, ?, 0)";
+        $query = "INSERT INTO homes (user_id, title, description, address, price, type, media, approved) VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
         if ($stmt = mysqli_prepare($con, $query)) {
-            mysqli_stmt_bind_param($stmt, "isssss", $user_id, $title, $description, $price, $type, $media_paths_json);
+            mysqli_stmt_bind_param($stmt, "issssss", $user_id, $title, $description, $address, $price, $type, $media_paths_json);
             if (mysqli_stmt_execute($stmt)) {
                 header("Location: index.php");
                 die;
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             echo "Échec de la préparation de la requête : " . mysqli_error($con);
         }
     } else {
-        echo "Veuillez saisir un titre, une description, un prix, un type valides, et au moins un fichier multimédia.";
+        echo "Veuillez saisir un titre, une description, un prix, une adresse, un type valides, et au moins un fichier multimédia.";
     }
 }
 ?>
