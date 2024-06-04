@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <div class="container">
     <form action="add_home.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="title">Type d'annonce:</label>
+            <label for="title">annonce:</label>
             <input type="text" name="title" required>
         </div>
 

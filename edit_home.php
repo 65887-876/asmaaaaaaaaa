@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     
     <form action="edit_home.php?home_id=<?php echo htmlspecialchars($home_id); ?>" method="POST" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="title">Titre :</label>
+        <label for="title">annonce:</label>
         <div class="input-container">
             <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required>
         </div>
@@ -117,12 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="description">Description :</label>
-        <div class="input-container">
-            <textarea name="description" required><?php echo isset($home['description']) ? htmlspecialchars($home['description']) : ''; ?></textarea>
-        </div>
-    </div>
+
 
     <?php if (!empty($home['media'])): ?>
         <div class="form-group">
@@ -137,7 +132,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
-
+    <div class="form-group">
+        <label for="description">Description :</label>
+        <div class="input-container">
+            <textarea name="description" required><?php echo isset($home['description']) ? htmlspecialchars($home['description']) : ''; ?></textarea>
+        </div>
+    </div>
     <div class="risk">
         <button type="submit">Mettre à Jour la Maison</button>
         <button type="submit" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette maison ?')">Supprimer la Maison</button>
