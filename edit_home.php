@@ -89,13 +89,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <html lang="fr">
 <head>
     <title>Modifier votre Bien Immobilier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <link rel="stylesheet" href="styles/edit_home.css">
+    <style>
+    .image-container {
+        display: inline-block;
+        vertical-align: top; /* Align images to the top */
+        margin-right: 10px; /* Add some spacing between images */
+    }
+    .image-container img {
+        max-width: 100px; /* Limit the maximum width of images */
+        height: 80px; /* Set a fixed height for all images */
+        object-fit: cover; /* Maintain aspect ratio while covering the container */
+    }
+</style>
 </head>
 <body>
     <?php include 'header.php'?>
     <h2>Modifier Maison ou Villa</h2>
     
-    <form action="edit_home.php?home_id=<?php echo htmlspecialchars($home_id); ?>" method="POST" enctype="multipart/form-data">
+    <form action="edit_home.php?home_id=<?php echo htmlspecialchars($home_id); ?>" method="POST" class="container" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">annonce:</label>
         <div class="input-container">
@@ -118,20 +132,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </div>
 
 
-
     <?php if (!empty($home['media'])): ?>
-        <div class="form-group">
-            <label>Photos Actuelles :</label>
-            <?php $media_paths = json_decode($home['media'], true); ?>
-            <?php foreach ($media_paths as $key => $path): ?>
-                <input type="hidden" name="existing_media[]" value="<?php echo $path; ?>">
-                <div class="image-container">
-                    <img src="<?php echo htmlspecialchars($path); ?>" alt="Image Actuelle" style="max-width: 100px;"><br>
-                    <input type="checkbox" name="delete_image[]" value="<?php echo $key; ?>"> Supprimer
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
+    <div class="form-group">
+        <label>choisir pour suprimer:</label>
+        <?php $media_paths = json_decode($home['media'], true); ?>
+        <?php foreach ($media_paths as $key => $path): ?>
+            <input type="hidden" name="existing_media[]" value="<?php echo $path; ?>">
+            <div class="image-container">
+                <img src="<?php echo htmlspecialchars($path); ?>" alt="Image Actuelle" style="max-width: 100px;"><br>
+                <input type="checkbox" name="delete_image[]" value="<?php echo $key; ?>"> 
+                <label for="delete_image[]"></label> <!-- Trash bin icon -->
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
     <div class="form-group">
         <label for="description">Description :</label>
         <div class="input-container">

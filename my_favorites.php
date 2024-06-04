@@ -23,6 +23,9 @@ $result = mysqli_query($con, $query);
 <head>
     <title>Mes Favoris</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <style>
         body {
@@ -124,7 +127,6 @@ $result = mysqli_query($con, $query);
             margin: 2;
         }
 
-        .home-card-buttons .favorite-btn,
         .home-card-buttons .edit-btn,
         .home-card-buttons .delete-btn,
         .home-card-buttons .contact-btn {
@@ -136,10 +138,27 @@ $result = mysqli_query($con, $query);
             cursor: pointer;
             text-decoration: none;
         }
+/* Button styles */
+.home-card-buttons .favorite-btn {
+    background: #fff; /* White color for the button */
+    color: grey; /* Black color for the heart icon */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
 
-        .home-card-buttons .favorite-btn.favorited {
-            background: #ff4757;
-        }
+
+/* Hover effect for favorite button */
+.home-card-buttons .favorite-btn:hover {
+    color: red; /* Change heart icon color to red on hover */
+}
+/* Red color for the heart when clicked */
+.home-card-buttons .favorite-btn.clicked {
+    color: #red; /* Red color for the heart icon */
+}
 
         .home-card-buttons .edit-btn {
             background: #28a745;
@@ -180,6 +199,7 @@ $result = mysqli_query($con, $query);
     bottom: 0;
 }
     </style>
+
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -225,7 +245,7 @@ $result = mysqli_query($con, $query);
                     echo "<div class='home-card-buttons'>";
                     echo "<form action='favorite_handler.php' method='POST'>";
                     echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
-                    echo "<button type='submit' class='favorite-btn'>&hearts;</button>";
+                    echo "<button type='submit' class='favorite-btn'><i class='fas fa-heart'></i></button>";
                     echo "</form>";
 
                     if ($user_id && $home['user_id'] === $user_id) {

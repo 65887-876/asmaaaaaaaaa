@@ -84,7 +84,6 @@ body {
     margin: 2;
 }
 
-.home-card-buttons .favorite-btn,
 .home-card-buttons .edit-btn,
 .home-card-buttons .delete-btn,
 .home-card-buttons .contact-btn {
@@ -97,9 +96,6 @@ body {
     text-decoration: none;
 }
 
-.home-card-buttons .favorite-btn.favorited {
-    background: #ff4757;
-}
 
 .home-card-buttons .edit-btn {
     background: #28a745;
@@ -132,7 +128,6 @@ body {
     margin: 2;
 }
 
-.home-card-buttons .favorite-btn,
 .home-card-buttons .edit-btn,
 .home-card-buttons .delete-btn,
 .home-card-buttons .contact-btn {
@@ -145,8 +140,31 @@ body {
     text-decoration: none;
 }
 
-.home-card-buttons .favorite-btn.favorited {
-    background: #ff4757;
+/* Button styles */
+.home-card-buttons .favorite-btn {
+    background: #fff; /* White color for the button */
+    color: grey; /* Black color for the heart icon */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+/* Hover effect */
+.home-card-buttons .favorite-btn:hover {
+    background: #f0f0f0; /* Light grey background on hover */
+}
+
+/* Red color for the heart when clicked */
+.home-card-buttons .favorite-btn.clicked {
+    color: #dc3545; /* Red color for the heart icon */
+}
+
+/* Red color for the heart icon on hover */
+.home-card-buttons .favorite-btn:hover i {
+    color: #dc3545; /* Red color for the heart icon on hover */
 }
 
 .home-card-buttons .edit-btn {

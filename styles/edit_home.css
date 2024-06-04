@@ -35,8 +35,8 @@ form {
 }
 
 label {
-    width: 20%; /* Set label width to 20% */
-    text-align: right; /* Align label text to the right */
+    width: 25%; /* Set label width to 20% */
+    text-align: left; /* Align label text to the right */
     font-weight: bold;
     margin-right: 10px;
 }

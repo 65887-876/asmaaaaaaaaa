@@ -18,6 +18,8 @@ $result = mysqli_query($con, $query);
     <!-- Include Slick CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 </head>
 <body>
     <div class="home-section">
@@ -69,7 +71,7 @@ $result = mysqli_query($con, $query);
                     echo "<div class='home-card-buttons'>";
                     echo "<form action='favorite_handler.php' method='POST'>";
                     echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
-                    echo "<button type='submit' class='favorite-btn" . ($is_favorited ? " favorited" : "") . "'>&hearts;</button>";
+                    echo "<button type='submit' class='favorite-btn" . ($is_favorited ? " favorited" : "") . "'><i class='fas fa-heart" . ($is_favorited ? " clicked" : "") . "'></i></button>";
                     echo "</form>";
 
                     if ($user_id && $home['user_id'] === $user_id) {
