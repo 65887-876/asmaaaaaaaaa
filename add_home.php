@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $description = $_POST['description'];
     $address = $_POST['address'];
     $price = $_POST['price'];
+    $price_period = $_POST['price_period'];
     $type = $_POST['type'];
     $media_paths = [];
 
@@ -38,11 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "Vous pouvez télécharger jusqu'à 6 fichiers.";
     }
 
-    if (!empty($title) && !empty($description) && !empty($price) && !empty($type) && !empty($address) && !empty($media_paths)) {
+    if (!empty($title) && !empty($description) && !empty($price) && !empty($price_period) && !empty($type) && !empty($address) && !empty($media_paths)) {
         $media_paths_json = json_encode($media_paths);
-        $query = "INSERT INTO homes (user_id, title, description, address, price, type, media, approved) VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
+        $query = "INSERT INTO homes (user_id, title, description, address, price, price_period, type, media, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)";
         if ($stmt = mysqli_prepare($con, $query)) {
-            mysqli_stmt_bind_param($stmt, "issssss", $user_id, $title, $description, $address, $price, $type, $media_paths_json);
+            mysqli_stmt_bind_param($stmt, "isssssss", $user_id, $title, $description, $address, $price, $price_period, $type, $media_paths_json);
             if (mysqli_stmt_execute($stmt)) {
                 header("Location: index.php");
                 die;
@@ -54,10 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             echo "Échec de la préparation de la requête : " . mysqli_error($con);
         }
     } else {
-        echo "Veuillez saisir un titre, une description, un prix, une adresse, un type valides, et au moins un fichier multimédia.";
+        echo "Veuillez saisir un titre, une description, un prix, une période de prix, une adresse, un type valides, et au moins un fichier multimédia.";
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -72,14 +74,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <div class="container">
     <form action="add_home.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="title">annonce:</label>
+            <label for="title">Annonce:</label>
             <input type="text" name="title" required>
         </div>
 
         <div class="form-group">
             <label for="price">Prix :</label>
             <input type="text" name="price" required>
+            <select name="price_period" required>
+                <option value="" disabled selected hidden>Sélectionnez une période</option>
+                <option value="total">Total</option>
+                <option value="par mois">Par mois</option>
+                <option value="par ans">Par an</option>
+            </select>
         </div>
+        
         <div class="form-group">
             <label for="address">Adresse :</label>
             <input type="text" name="address" required>
@@ -106,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         
         <div class="line">
             <p><a href="index.php">Retour à l'Accueil</a></p>
-            <button type="submit" class="hey">publier</button>
+            <button type="submit" class="hey">Publier</button>
         </div>
     </form>
 </div>

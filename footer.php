@@ -11,7 +11,7 @@
         <ul class="footer-links">
             <li><a href="about.php">À Propos</a></li>
             <li><a href="about.php">Nos Services</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="my_favorites.php">Favorites</a></li>
         </ul>
     </div>
 

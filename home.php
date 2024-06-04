@@ -53,10 +53,16 @@ $result = mysqli_query($con, $query);
 
                     echo "<div class='home-card-content'>";
                     echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
-                    echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN</p>";
+                    echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN";
+
+                    if ($home['type'] === 'rent') {
+                        echo " / " . htmlspecialchars($home['price_period']);
+                    }
+
+                    echo "</p>";
                     echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
                     echo "<p>" . htmlspecialchars($home['description']) . "</p>";
-                    echo "<p class='address'>" . htmlspecialchars($home['address']) . "</p>";
+                    echo "<p class='address' style='color:orange;'>" . htmlspecialchars($home['address']) . "</p>";
                     echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
                     echo "</div>";
 
@@ -85,6 +91,7 @@ $result = mysqli_query($con, $query);
             ?>
         </div>
     </div>
+
 
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

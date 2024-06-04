@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Modifier Maison ou Villa</title>
+    <title>Modifier votre Bien Immobilier</title>
     <link rel="stylesheet" href="styles/edit_home.css">
 </head>
 <body>
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </div>
     <div class="risk">
         <button type="submit">Mettre à Jour la Maison</button>
-        <button type="submit" name="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette maison ?')">Supprimer la Maison</button>
+
     </div>
     <p><a href="index.php">Retour à l'Accueil</a></p> 
 </form>
