@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $title = isset($_POST['title']) ? $_POST['title'] : '';
     $description = isset($_POST['description']) ? $_POST['description'] : '';
     $price = isset($_POST['price']) ? $_POST['price'] : '';
+    $address = isset($_POST['address']) ? $_POST['address'] : '';
     $media_paths = $home['media'] ? json_decode($home['media'], true) : [];
 
     // Handle image deletion
@@ -60,15 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     // Update home details in database
-    if (!empty($title) && !empty($description) && !empty($price)) {
+    if (!empty($title) && !empty($description) && !empty($price) && !empty($address)) {
         // Check if there are any photos
         if (empty($media_paths)) {
             echo "Veuillez télécharger au moins une photo.";
         } else {
             $media_paths_json = json_encode($media_paths);
-            $update_query = "UPDATE homes SET title = ?, description = ?, price = ?, media = ? WHERE id = ? AND user_id = ?";
+            $update_query = "UPDATE homes SET title = ?, description = ?, price = ?, media = ?, address = ? WHERE id = ? AND user_id = ?";
             if ($stmt = mysqli_prepare($con, $update_query)) {
-                mysqli_stmt_bind_param($stmt, "ssssii", $title, $description, $price, $media_paths_json, $home_id, $user_id);
+                mysqli_stmt_bind_param($stmt, "ssssssi", $title, $description, $price, $media_paths_json, $address, $home_id, $user_id);
                 if (mysqli_stmt_execute($stmt)) {
                     header("Location: index.php");
                     die;
@@ -81,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             }
         }
     } else {
-        echo "Veuillez saisir un titre, une description, et un prix valides.";
+        echo "Veuillez saisir un titre, une description, un prix et une adresse valides.";
     }
 }
 ?>
@@ -90,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Modifier votre Bien Immobilier</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <link rel="stylesheet" href="styles/edit_home.css">
     <style>
     .image-container {
@@ -103,15 +103,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         height: 80px; /* Set a fixed height for all images */
         object-fit: cover; /* Maintain aspect ratio while covering the container */
     }
-</style>
+    </style>
 </head>
 <body>
     <?php include 'header.php'?>
-    <h2>Modifier Maison ou Villa</h2>
+    <h2>Modifier votre annonce</h2>
     
     <form action="edit_home.php?home_id=<?php echo htmlspecialchars($home_id); ?>" method="POST" class="container" enctype="multipart/form-data">
     <div class="form-group">
-        <label for="title">annonce:</label>
+        <label for="title">Type d'Annonce:</label>
         <div class="input-container">
             <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required>
         </div>
@@ -131,7 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </div>
 
-
     <?php if (!empty($home['media'])): ?>
     <div class="form-group">
         <label>choisir pour suprimer:</label>
@@ -145,7 +144,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
         <?php endforeach; ?>
     </div>
-<?php endif; ?>
+    <?php endif; ?>
+
+    <div class="form-group">
+        <label for="address">Adresse :</label>
+        <div class="input-container">
+            <input type="text" name="address" value="<?php echo isset($home['address']) ? htmlspecialchars($home['address']) : ''; ?>" required>
+        </div>
+    </div>
 
     <div class="form-group">
         <label for="description">Description :</label>
@@ -155,11 +161,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     </div>
     <div class="risk">
         <button type="submit">Mettre à Jour la Maison</button>
-
     </div>
     <p><a href="index.php">Retour à l'Accueil</a></p> 
 </form>
 
-    <?php include 'footer.php'?>
+<?php include 'footer.php'?>
 </body>
 </html>

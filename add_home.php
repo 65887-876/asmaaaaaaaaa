@@ -69,12 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 <?php include 'header.php'; ?>
 
-<h2>Ajouter un Bien Immobilier</h2>
+<h2>Ajouter votre annonce</h2>
 
 <div class="container">
     <form action="add_home.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="title">Annonce:</label>
+            <label for="title">Type d'Annonce:</label>
             <input type="text" name="title" required>
         </div>
 
