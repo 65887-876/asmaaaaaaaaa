@@ -7,9 +7,9 @@ $user_id = $_GET['user_id'] ?? null;
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <title>Contact Seller</title>
+    <title>Contacter le Vendeur</title>
     <link rel="stylesheet" type="text/css" href="styles/contact_seller.css">
 </head>
 <body>
@@ -25,16 +25,16 @@ $user_id = $_GET['user_id'] ?? null;
                 $user = mysqli_fetch_assoc($result);
 
                 echo "<div class='contact-card'>";
-                echo "<h2>Contact Information</h2>";
-                echo "<p><strong>Username:</strong> " . htmlspecialchars($user['username']) . "</p>";
-                echo "<p><strong>Email:</strong> " . htmlspecialchars($user['email']) . "</p>";
-                echo "<p><strong>Phone:</strong> " . htmlspecialchars($user['phone']) . "</p>";
+                echo "<h2>Informations de Contact</h2>";
+                echo "<p><strong>Nom d'utilisateur :</strong> " . htmlspecialchars($user['username']) . "</p>";
+                echo "<p><strong>Email :</strong> " . htmlspecialchars($user['email']) . "</p>";
+                echo "<p><strong>Téléphone :</strong> " . htmlspecialchars($user['phone']) . "</p>";
                 echo "</div>";
             } else {
-                echo "<div class='contact-card'><p>User not found.</p></div>";
+                echo "<div class='contact-card'><p>Utilisateur non trouvé.</p></div>";
             }
         } else {
-            echo "<div class='contact-card'><p>Invalid user ID.</p></div>";
+            echo "<div class='contact-card'><p>ID utilisateur invalide.</p></div>";
         }
         ?>
     </div>

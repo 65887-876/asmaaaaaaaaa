@@ -90,97 +90,43 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Edit Home or Villa</title>
     <link rel="stylesheet" href="styles/edit_home.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        h2 {
-            text-align: center;
-        }
-        label {
-            font-weight: bold;
-        }
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-        input[type="file"] {
-            margin-top: 5px;
-        }
-        button[type="submit"],
-        button[name="delete"] {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button[type="submit"] {
-            background-color: #007bff;
-            color: white;
-        }
-        button[name="delete"] {
-            background-color: #dc3545;
-            color: white;
-        }
-        button[type="submit"]:hover,
-        button[name="delete"]:hover {
-            filter: brightness(0.8);
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        p {
-            text-align: center;
-            margin-top: 10px;
-        }
-        img {
-            max-width: 100px;
-            margin-bottom: 5px;
-        }
-        .risk{
-            margin: 2;
-            display:flex;
-            justify-content: space-between;
-        }
-    </style>
 </head>
 <body>
     <?php include 'header.php'?>
     <h2>Edit Home or Villa</h2>
     
     <form action="edit_home.php?home_id=<?php echo htmlspecialchars($home_id); ?>" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required><br> 
-        
-        <label for="description">Description:</label>
-        <textarea name="description" required><?php echo isset($home['description']) ? htmlspecialchars($home['description']) : ''; ?></textarea><br>
-        
+        <div class="input-container">
+            <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="price">Price:</label>
-        <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required><br>
+        <div class="input-container">
+            <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required>
+        </div>
+    </div>
 
+    <div class="form-group">
         <label for="media">Photos (up to 6):</label>
-        <input type="file" name="media[]" multiple accept="image/*"><br>
+        <div class="input-container">
+            <input type="file" name="media[]" multiple accept="image/*">
+        </div>
+    </div>
 
-        <?php if (!empty($home['media'])): ?>
-            <label>Current Photos:</label><br>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <div class="input-container">
+            <textarea name="description" required><?php echo isset($home['description']) ? htmlspecialchars($home['description']) : ''; ?></textarea>
+        </div>
+    </div>
+
+    <?php if (!empty($home['media'])): ?>
+        <div class="form-group">
+            <label>Current Photos:</label>
             <?php $media_paths = json_decode($home['media'], true); ?>
             <?php foreach ($media_paths as $key => $path): ?>
                 <input type="hidden" name="existing_media[]" value="<?php echo $path; ?>">
@@ -189,15 +135,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <input type="checkbox" name="delete_image[]" value="<?php echo $key; ?>"> Delete
                 </div>
             <?php endforeach; ?>
-        <?php endif; ?>
-
-        <div class="risk">
-            <button type="submit">Update Home</button>
-            <button type="submit" name="delete" onclick="return confirm('Are you sure you want to delete this home?')">Delete Home</button>
         </div>
-        <p><a href="index.php">Back to Home</a></p> 
-    </form>
-    
+    <?php endif; ?>
+
+    <div class="risk">
+        <button type="submit">Update Home</button>
+        <button type="submit" name="delete" onclick="return confirm('Are you sure you want to delete this home?')">Delete Home</button>
+    </div>
+    <p><a href="index.php">Back to Home</a></p> 
+</form>
+
     <?php include 'footer.php'?>
 </body>
 </html>
