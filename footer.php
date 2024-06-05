@@ -9,9 +9,12 @@
     <div class="footer-section">
         <h4>Liens Rapides</h4>
         <ul class="footer-links">
+        <li><a href="index.php">Accueil</a></li>
+
             <li><a href="about.php">À Propos</a></li>
             <li><a href="about.php">Nos Services</a></li>
             <li><a href="my_favorites.php">Favorites</a></li>
+
         </ul>
     </div>
 
