@@ -1,38 +1,31 @@
 .hero {
     background: linear-gradient(
-        rgba(0, 0, 0, 0.5), /* Semi-transparent dark overlay */
-        rgba(0, 0, 0, 0.5) /* Uniform transparency across the gradient */
+        rgba(0, 0, 0, 0.4), /* Reduced opacity for clearer image */
+        rgba(0, 0, 0, 0.4)
     ), 
-    url('./house.jpg'); /* Background image */
+    url('./OIP (1).jpg'); /* Ensure the correct path to the image */
     background-size: cover; /* Cover the entire area */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent repetition */
-    min-height: 600px; /* Minimum height for the hero section */
+    min-height: 700px; /* Minimum height for the hero section */
     display: flex; /* Use flexbox for alignment */
     justify-content: center; /* Center the content horizontally */
     align-items: center; /* Center the content vertically */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    color: white;
-    
+    flex-direction: column; /* Arrange content in a column */
+    gap: 20px; /* Gap between elements */
+    color: white; /* White text color */
 }
 
 .hero-content {
     text-align: center; /* Center the text */
-    color: white; /* White text for high contrast against dark overlay */
     padding: 20px; /* Padding for proper spacing */
-    border-radius: 10px; /* Rounded corners for a smooth look */
+    border-radius: 3px; /* Rounded corners for a smooth look */
     display: flex; /* Use flexbox for alignment */
     justify-content: center; /* Center the content horizontally */
     align-items: center; /* Center the content vertically */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 70px;
-    color: white;
-    max-width: 480px;
+    flex-direction: column; /* Arrange content in a column */
+    gap: 70px; /* Gap between elements */
+    max-width: 480px; /* Maximum width of content */
 }
 
 .hero-content h1 {
@@ -40,12 +33,13 @@
     font-weight: bold; /* Bold text for emphasis */
 }
 
-
 button {
     color: white; 
+    width: 170px;
+    height: 60px;
     padding: 15px 30px; 
     border: none;
-    border-radius: 30px;
+    border-radius: 3px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
     font-size: 18px; 
     font-weight: bold;
@@ -53,9 +47,6 @@ button {
     text-align: center;
     transition: all 0.3s ease; 
     cursor: pointer; 
-}
-button a {
-    text-decoration: none;
 }
 
 button:hover {

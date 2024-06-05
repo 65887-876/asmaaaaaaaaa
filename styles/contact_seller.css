@@ -1,40 +1,50 @@
 body {
-    font-family: Arial, sans-serif; /* Basic font */
-    background-color: #f9f9f9; /* Light background color */
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full viewport height */
 }
 
 .contact-container {
-    display: flex; /* Flex layout for centering */
+    flex: 1; /* Let the contact container grow to fill remaining space */
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    background-color: #f5f5f5; /* Background color */
+    background-color: #f5f5f5;
 }
 
 .contact-card {
-    background-color: #ffffff; /* White card background */
-    padding: 40px; /* Larger padding for a more spacious feel */
-    border-radius: 12px; /* Rounded corners */
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 10px 30px 0 rgba(0, 0, 0, 0.1); /* Stronger shadow for emphasis */
-    max-width: 600px; /* Wider maximum width for larger content */
-    text-align: left; /* Align text to the left for better readability */
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    text-align: left;
 }
 
 .contact-card h2 {
-    font-size: 1.8rem; /* Larger heading font size */
-    color: #333; /* Darker color for headings */
+    font-size: 1.8rem;
+    color: #333;
 }
 
 .contact-card p {
-    font-size: 1.2rem; /* Increase font size for better readability */
-    color: #666; /* Slightly darker text for content */
-    line-height: 1.6; /* Increase line height for more space between lines */
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
 }
 
 .contact-card strong {
-    color: #333; /* Bolded labels for contact details */
-    font-weight: bold; /* Increase font weight for emphasis */
+    color: #333;
+    font-weight: bold;
 }
 
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; /* Push the footer to the bottom */
+}

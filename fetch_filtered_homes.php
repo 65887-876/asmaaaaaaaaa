@@ -1,47 +1,39 @@
 <?php
-// Start the session
 session_start();
-
-// Include the database connection file
 require_once("connection.php");
 
-// Get the user_id from the session variable
 $user_id = $_SESSION['user_id'] ?? null;
 
-// Check if the 'title' parameter is set in the POST request
-if(isset($_POST['title'])) {
-    // Sanitize the input to prevent SQL injection
+if (isset($_POST['title']) && isset($_POST['type'])) {
     $selectedTitle = mysqli_real_escape_string($con, $_POST['title']);
+    $selectedType = mysqli_real_escape_string($con, $_POST['type']);
 
-    // Construct the SQL query to fetch homes based on the selected title
-    if(empty($selectedTitle)) {
-        // If "Tous les titres" is selected, fetch all homes
-        $query = "SELECT homes.*, users.username, 
-        (SELECT COUNT(*) FROM favorites WHERE user_id = '$user_id' AND home_id = homes.id) AS is_favorited 
-        FROM homes 
-        JOIN users ON homes.user_id = users.user_id
-        WHERE homes.approved = 1";
-    } else {
-        // If a specific title is selected, fetch homes matching that title
-        $query = "SELECT homes.*, users.username, 
-        (SELECT COUNT(*) FROM favorites WHERE user_id = '$user_id' AND home_id = homes.id) AS is_favorited 
-        FROM homes 
-        JOIN users ON homes.user_id = users.user_id
-        WHERE homes.approved = 1 AND homes.title = '$selectedTitle'";
+    $query = "SELECT homes.*, users.username, 
+    (SELECT COUNT(*) FROM favorites WHERE user_id = '$user_id' AND home_id = homes.id) AS is_favorited 
+    FROM homes 
+    JOIN users ON homes.user_id = users.user_id
+    WHERE homes.approved = 1";
+
+    if (!empty($selectedTitle)) {
+        $query .= " AND homes.title = '$selectedTitle'";
     }
 
-    // Execute the query
+    if (!empty($selectedType)) {
+        $query .= " AND homes.type = '$selectedType'";
+    }
+
     $result = mysqli_query($con, $query);
 
-    // Check if there are any matching homes
-    if(mysqli_num_rows($result) > 0) {
-        // Loop through the results and generate HTML content for each home
-        while($home = mysqli_fetch_assoc($result)) {
-            // Output HTML content for the home
+    if (mysqli_num_rows($result) > 0) {
+        while ($home = mysqli_fetch_assoc($result)) {
+            $is_favorited = false;
+            if ($user_id) {
+                $favorite_check = mysqli_query($con, "SELECT COUNT(*) AS count FROM favorites WHERE user_id = '$user_id' AND home_id = '{$home['id']}'");
+                $is_favorited = (mysqli_fetch_assoc($favorite_check)['count'] > 0);
+            }
+
             echo "<div class='home-card'>";
-            // Output home card slider
             echo "<div class='home-card-slider'>";
-            // Output media files for the home
             $media_files = json_decode($home['media'], true);
             foreach ($media_files as $file) {
                 $file_extension = pathinfo($file, PATHINFO_EXTENSION);
@@ -53,41 +45,49 @@ if(isset($_POST['title'])) {
                 }
                 echo "</div>";
             }
-            echo "</div>"; // End home card slider
+            echo "</div>"; 
 
-            // Output home card content
             echo "<div class='home-card-content'>";
             echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
             echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN";
-
             if ($home['type'] === 'rent') {
                 echo " / " . htmlspecialchars($home['price_period']);
             }
-
             echo "</p>";
             echo "<h3>" . htmlspecialchars($home['address']) . "</h3>";
             echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
             echo "<p>" . htmlspecialchars($home['description']) . "</p>";
             echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
-            echo "</div>"; // End home card content
+            echo "</div>"; 
 
             echo "<div class='home-card-buttons'>";
-            // Output form for adding/removing from favorites
-            // Output buttons for editing/deleting home
-            // Output button for contacting seller
-            echo "</div>"; // End home card buttons
-            
-            echo "</div>"; // End home card
+            echo "<form action='favorite_handler.php' method='POST'>";
+            echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
+            echo "<button type='submit' class='favorite-btn" . ($is_favorited ? " favorited" : "") . "'><i class='fas fa-heart" . ($is_favorited ? " clicked" : "") . "'></i></button>";
+            echo "</form>";
+
+            if ($user_id && $home['user_id'] === $user_id) {
+                echo "<button class='edit-btn' onclick=\"window.location.href='edit_home.php?home_id=" . htmlspecialchars($home['id']) . "'\">✎ Modifier</button>";
+                echo "<form action='delete_home.php' method='POST' style='display:inline-block;'>";
+                echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
+                echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\">🗑 Supprimer</button>";
+                echo "</form>";
+            } else {
+                echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'>Contacter le Vendeur</a>";
+            }
+
+            echo "</div>";
+            echo "</div>";
         }
     } else {
-        if(empty($selectedTitle)) {
-            echo "<p>Tous les titres</p>";
+        if (empty($selectedTitle) && empty($selectedType)) {
+            echo "<p>Tous les titres et types</p>";
         } else {
-            echo "<p>Aucune maison trouvée pour ce titre.</p>";
+            echo "<p>Aucune maison trouvée pour ce titre et type.</p>";
         }
     }
 } else {
-    echo "<p>Erreur: Aucun titre sélectionné.</p>";
+    echo "<p>Erreur: Aucun filtre sélectionné.</p>";
 }
 ?>
 

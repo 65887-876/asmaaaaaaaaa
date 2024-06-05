@@ -1,12 +1,18 @@
 <?php
-$loggedIn = isset($_SESSION['user_id']); // Check if user is logged in
-$isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1; // Check if user is admin
-?>
 
+// Define $currentPage variable based on the current page's name or URL
+$currentPage = basename($_SERVER['SCRIPT_NAME'], ".php");
+
+// Initialize $isAdmin and $loggedIn variables
+$isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1;
+$loggedIn = isset($_SESSION['user_id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skikda Immobilier</title>
     <link rel="stylesheet" href="styles/header.css">
     <style>
         header {
@@ -14,6 +20,7 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1; // Check 
             padding: 20px 40px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-bottom: solid 1px #e0e0e0;
+            height: 100px;
         }
 
         .header-container {
@@ -48,6 +55,10 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1; // Check 
             transition: color 0.3s;
         }
 
+        .nav-links a:hover {
+            color: green;
+        }
+
         .auth-buttons {
             display: flex;
             align-items: center;
@@ -61,6 +72,10 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1; // Check 
             transition: background 0.3s, color 0.3s;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             margin-left: 10px;
+        }
+
+        .current-page {
+            text-decoration: underline;
         }
 
         .login-btn {
@@ -91,13 +106,13 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1; // Check 
             <h3>Skikda Immobilier</h3>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="index.php">Accueil</a></li>
-                    <li><a href="services.php">Les Services</a></li>
-                    <li><a href="about.php">A Propos</a></li>
+                    <li <?php if ($currentPage === 'index'): ?>class="current-page"<?php endif; ?>><a href="index.php">Accueil</a></li>
+                    <li <?php if ($currentPage === 'services'): ?>class="current-page"<?php endif; ?>><a href="services.php">Les Services</a></li>
+                    <li <?php if ($currentPage === 'about'): ?>class="current-page"<?php endif; ?>><a href="about.php">A Propos</a></li>
                     <?php if ($loggedIn): ?>
-                        <li><a href="my_favorites.php">Favorites</a></li>
+                        <li <?php if ($currentPage === 'my_favorites'): ?>class="current-page"<?php endif; ?>><a href="my_favorites.php">Favorites</a></li>
                         <?php if ($isAdmin): ?>
-                            <li><a href="admin.php">Admin</a></li>
+                            <li <?php if ($currentPage === 'admin'): ?>class="current-page"<?php endif; ?>><a href="admin.php">Admin</a></li>
                         <?php endif; ?>
                     <?php endif; ?>
                 </ul>

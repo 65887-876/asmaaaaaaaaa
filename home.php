@@ -18,7 +18,6 @@ $result = mysqli_query($con, $query);
     <meta charset="UTF-8">
     <title>Explorateur d'immobilier</title>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
-    <!-- Include Slick CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -26,23 +25,32 @@ $result = mysqli_query($con, $query);
 </head>
 <body>
     <div class="home-section">
-        <h2 class="home-title">Explorer nos immobilier</h2>
+        <h2 class="home-title" style="font-size:40px;">Explorer nos immobilier</h2>
         <div style="display:flex;">
+    <label style="padding-top:33px;padding-right:18px;" ><h3 style='color:black;'>filtrer par:</h3></label>
+    <div style="display:flex;flex-direction:column;">
+    <h4 style="display:flex;justify-content:center;">type d'annonce</h4>        
+    <select id="title-filter">
+        <option value="">Tous</option>
+        <?php
+        $titles_query = mysqli_query($con, "SELECT DISTINCT title FROM homes");
+        while ($title_row = mysqli_fetch_assoc($titles_query)) {
+            echo "<option value='" . htmlspecialchars($title_row['title']) . "'>" . htmlspecialchars($title_row['title']) . "</option>";
+        }
+        ?>
+    </select>
+    </div>
+    <div style="display:flex;flex-direction:column; margin-left:30px;">
 
-        
-        <!-- Dropdown select for filtering -->
-        <label style="padding-top:10px;" for="title-filter"><h3>Filtrer par titre:</h3></label>
-        <select id="title-filter">
-            <option value="">Tous les titres</option>
-            <?php
-            // Fetch all unique titles from the database
-            $titles_query = mysqli_query($con, "SELECT DISTINCT title FROM homes");
-            while ($title_row = mysqli_fetch_assoc($titles_query)) {
-                echo "<option value='" . htmlspecialchars($title_row['title']) . "'>" . htmlspecialchars($title_row['title']) . "</option>";
-            }
-            ?>
-        </select>
-        </div>
+
+    <h4 style="display:flex;justify-content:center;" >type</h4>
+    <select id="type-filter" class="type-filtrer">
+        <option value="">vendre/louer</option>
+        <option value="sell">À vendre</option>
+        <option value="rent">À louer</option>
+    </select>
+    </div>
+</div>
         <div class="home-grid">
             <?php
             if ($result && mysqli_num_rows($result) > 0) {
@@ -126,14 +134,15 @@ $result = mysqli_query($con, $query);
         });
 
         // Handle select change event
-        $('#title-filter').change(function() {
-            var selectedTitle = $(this).val();
+        $('#title-filter, #type-filter').change(function() {
+            var selectedTitle = $('#title-filter').val();
+            var selectedType = $('#type-filter').val();
 
-            // Send an AJAX request to fetch filtered homes based on selected title
+            // Send an AJAX request to fetch filtered homes based on selected title and type
             $.ajax({
                 url: 'fetch_filtered_homes.php',
                 type: 'POST',
-                data: {title: selectedTitle},
+                data: { title: selectedTitle, type: selectedType },
                 success: function(response) {
                     $('.home-grid').html(response); // Replace existing homes with filtered homes
                     $('.home-card-slider').slick('unslick'); // Unslick the slider
@@ -148,6 +157,6 @@ $result = mysqli_query($con, $query);
             });
         });
     });
-</script>
+    </script>
 </body>
 </html>

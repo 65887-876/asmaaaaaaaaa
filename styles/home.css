@@ -203,18 +203,41 @@ body {
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #fff;
-    color: #333;
+    color: black;
     cursor: pointer;
   }
   
   #title-filter option {
-    padding: 8px;
-    font-size: 16px;
+    padding: 12px;
+    font-size: 12px;
     background-color: #fff;
     color: #333;
   }
   
   #title-filter option:hover {
+    background-color: #f0f0f0;
+  }
+  
+
+  .type-filtrer{
+    margin-bottom:  50px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: black;
+    cursor: pointer;
+  }
+  
+  .type-filtrer option {
+    padding: 12px;
+    font-size: 12px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  .type-filtrer option:hover {
     background-color: #f0f0f0;
   }
   
