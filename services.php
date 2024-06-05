@@ -35,7 +35,7 @@ require_once("connection.php");
             <p>Notre équipe se consacre à fournir un service exceptionnel, mettant l'accent sur la satisfaction du client. Avec des années d'expérience et une connaissance approfondie du marché immobilier, nous vous assurons une expérience fluide et agréable.</p>
 
             <h2>Contactez-Nous</h2>
-            <p>Si vous avez des questions ou souhaitez en savoir plus sur nos services, n'hésitez pas à <a href="contact.php">nous contacter</a>. Nous serons ravis de vous aider à trouver la maison de vos rêves!</p>
+            <p>Si vous avez des questions ou souhaitez en savoir plus sur nos services, n'hésitez pas à nous contacter. Nous serons ravis de vous aider à trouver la maison de vos rêves!</p>
         </div>
     </div>
 

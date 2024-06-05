@@ -50,6 +50,12 @@ textarea {
     box-sizing: border-box;
 }
 
+/* Specific style for price input container */
+.price-container {
+    flex: 1.95;
+    width: 100px; /* Adjust the width to be much narrower */
+}
+
 textarea {
     resize: vertical;
     min-height: 100px;
@@ -88,6 +94,10 @@ button[name="delete"]:hover {
     justify-content: space-between;
 }
 
+.line{
+    display: flex;
+    justify-content: space-between;
+}
 .image-container {
     margin-bottom: 10px;
 }

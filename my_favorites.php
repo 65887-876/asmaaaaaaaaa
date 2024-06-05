@@ -32,17 +32,17 @@ $result = mysqli_query($con, $query);
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport height */
+            min-height: 100vh; /* Définir la hauteur minimale du corps à 100 % de la hauteur de la fenêtre */
             margin: 0;
         }
 
-        /* Main content wrapper */
+        /* Conteneur principal */
         .main-content {
-            flex: 1; /* Expand to fill the available space */
-            padding-bottom: 50px; /* Adjust as needed to accommodate the footer */
+            flex: 1; /* S'étend pour remplir l'espace disponible */
+            padding-bottom: 50px; /* Ajuster au besoin pour s'adapter au pied de page */
         }
 
-        /* Success message styles */
+        /* Styles des messages de succès */
         .success-message {
             background-color: #d4edda;
             color: #155724;
@@ -54,7 +54,7 @@ $result = mysqli_query($con, $query);
             font-weight: bold;
         }
 
-        /* Home section styles */
+        /* Styles de la section des maisons */
         .home-section {
             padding: 20px;
         }
@@ -64,7 +64,7 @@ $result = mysqli_query($con, $query);
             margin-bottom: 20px;
         }
 
-        /* Grid styles */
+        /* Styles de la grille */
         .home-grid {
             display: flex;
             flex-wrap: wrap;
@@ -82,15 +82,15 @@ $result = mysqli_query($con, $query);
 
         .home-card img,
         .home-card video {
-            height: 280px; /* Set the height to 280px */
+            height: 280px; /* Définir la hauteur à 280px */
             width: 100%;
             object-fit: cover;
         }
 
-        /* Update the styles for home-card-content */
+        /* Mettre à jour les styles pour le contenu de la carte */
         .home-card-content {
             padding: 15px;
-            position: relative; /* Ensure z-index works */
+            position: relative; /* Assurer que le z-index fonctionne */
         }
 
         .home-card-content h3 {
@@ -101,7 +101,7 @@ $result = mysqli_query($con, $query);
         .home-card-content .price {
             color: orange;
             font-size: 18px;
-            font: bolder;
+            font-weight: bold;
         }
 
         .home-card-content .type {
@@ -114,7 +114,7 @@ $result = mysqli_query($con, $query);
             color: #555;
         }
 
-        /* Button styles */
+        /* Styles des boutons */
         .home-card-buttons {
             padding: 15px;
             display: flex;
@@ -138,27 +138,26 @@ $result = mysqli_query($con, $query);
             cursor: pointer;
             text-decoration: none;
         }
-/* Button styles */
-.home-card-buttons .favorite-btn {
-    background: #fff; /* White color for the button */
-    color: grey; /* Black color for the heart icon */
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s; /* Smooth transition on hover */
-}
+        /* Styles des boutons */
+        .home-card-buttons .favorite-btn {
+            background: #fff; /* Couleur blanche pour le bouton */
+            color: grey; /* Couleur noire pour l'icône du cœur */
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s; /* Transition douce au survol */
+        }
 
-
-/* Hover effect for favorite button */
-.home-card-buttons .favorite-btn:hover {
-    color: red; /* Change heart icon color to red on hover */
-}
-/* Red color for the heart when clicked */
-.home-card-buttons .favorite-btn.clicked {
-    color: #red; /* Red color for the heart icon */
-}
+        /* Effet de survol pour le bouton favori */
+        .home-card-buttons .favorite-btn:hover {
+            color: red; /* Changer la couleur de l'icône du cœur en rouge au survol */
+        }
+        /* Couleur rouge pour le cœur lorsqu'il est cliqué */
+        .home-card-buttons .favorite-btn.clicked {
+            color: red; /* Couleur rouge pour l'icône du cœur */
+        }
 
         .home-card-buttons .edit-btn {
             background: #28a745;
@@ -172,32 +171,33 @@ $result = mysqli_query($con, $query);
             background: #17a2b8;
         }
 
-        /* Swiper styles */
+        /* Styles du carrousel */
         .swiper-container {
             width: 100%;
             height: 260px;
         }
 
-        /* Update the Swiper styles to hide only the pagination dots */
+        /* Mettre à jour les styles du carrousel pour masquer uniquement les points de pagination */
         .swiper-container .swiper-pagination {
             display: none;
         }
-        /* Update the styles for .swiper-slide to center the images horizontally */
+
+        /* Mettre à jour les styles pour centrer les images horizontalement */
         .swiper-slide {
             display: flex;
-            justify-content: center; /* Center horizontally */
+            justify-content: center; /* Centrer horizontalement */
             align-items: center;
             background: #f9f9f9;
         }
 
         footer {
-    background-color: #f8f9fa;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-}
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
     </style>
 
 </head>
@@ -262,7 +262,7 @@ $result = mysqli_query($con, $query);
                     echo "</div>";
                 }
             } else {
-                echo "<p>No favorites found.</p>";
+                echo "<p>Pas de favoris ici</p>";
             }
             ?>
         </div>

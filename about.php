@@ -31,7 +31,7 @@ require_once("connection.php");
 
         <div class="contact-information">
             <h2>Contactez-Nous</h2>
-            <p>Si vous avez des questions ou souhaitez plus d'informations sur nos services, n'hésitez pas à <a href="contact.php">nous contacter</a>. Nous sommes là pour vous aider à trouver votre maison de rêve!</p>
+            <p>Si vous avez des questions ou souhaitez plus d'informations sur nos services, n'hésitez pas ànous contacter. Nous sommes là pour vous aider à trouver votre maison de rêve!</p>
         </div>
     </div>
 

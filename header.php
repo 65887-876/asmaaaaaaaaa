@@ -64,23 +64,23 @@ $isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1; // Check 
         }
 
         .login-btn {
-            background: green;
-            color: #333;
+            background: grey;
+            color: white;
             border: 2px solid #333;
         }
 
         .login-btn:hover {
-            background: #333;
+            background: green;
             color: white;
         }
 
         .signup-btn {
-            background: #333;
+            background: grey;
             color: white;
         }
 
         .signup-btn:hover {
-            background: gray;
+            background: green;
             color: white;
         }
     </style>

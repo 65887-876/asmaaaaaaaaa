@@ -2,7 +2,7 @@
 <div class="footer-container">
     <div class="footer-section">
         <h4>Contactez-nous</h4>
-        <p>Email : asma@gmail.com</p>
+        <p>Email : immobilierskikda@gmail.com</p>
         <p>Téléphone : 0712345678</p>
     </div>
 

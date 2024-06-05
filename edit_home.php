@@ -118,19 +118,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required>
         </div>
     </div>
-    <div style="display:flex; justify-content:start;">
-            <select name="price_period" >
+
+    <div class="form-group">
+        <label for="price">Prix :</label>
+        <div class="input-container" style="width:100px; margin-right:160px;">
+            <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required>
+        </div>
+        <select name="price_period" >
                 <option value="" disabled selected hidden>Sélectionnez une période</option>
                 <option value="total">Total</option>
                 <option value="par mois">Par mois</option>
                 <option value="par ans">Par an</option>
             </select>
-        </div>
-    <div class="form-group">
-        <label for="price">Prix :</label>
-        <div class="input-container">
-            <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required>
-        </div>
     </div>
     <div class="form-group">
         <label for="address">Adresse :</label>
@@ -138,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <input type="text" name="address" value="<?php echo isset($home['address']) ? htmlspecialchars($home['address']) : ''; ?>" required>
         </div>
     </div>
-    <div style = "display: flex; justify-content: space-between;">
+    <div style = "display: flex;padding-bottom:10px;">
             <label for="type">Type :</label>
             <select name="type" required>
                 <option value="" disabled selected hidden>Sélectionnez un type</option>
@@ -148,9 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     <div class="form-group">
         <label for="media">Photos (jusqu'à 6) :</label>
-        <div class="input-container">
-            <input type="file" name="media[]" multiple accept="image/*">
-        </div>
+        <input type="file" name="media[]" multiple accept="image/*">
     </div>
 
 
@@ -178,9 +175,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
     </div>
     <div class="risk">
+        <p><a href="index.php">Retour à l'Accueil</a></p> 
         <button type="submit">Mettre à Jour la Maison</button>
     </div>
-    <p><a href="index.php">Retour à l'Accueil</a></p> 
+
 </form>
 
 <?php include 'footer.php'?>

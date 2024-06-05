@@ -196,3 +196,25 @@ body {
     align-items: center;
     background: #f9f9f9;
 }
+#title-filter {
+    margin-bottom:  50px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  #title-filter option {
+    padding: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  #title-filter option:hover {
+    background-color: #f0f0f0;
+  }
+  

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         echo "Erreur lors du déplacement du fichier téléchargé.";
                     }
                 } else {
-                    echo "Type de fichier non valide. Veuillez télécharger une image JPG, JPEG, PNG, GIF ou une vidéo MP4, MOV, AVI.";
+                    echo "Type de fichier non valide. Veuillez télécharger une image JPG, JPEG, PNG";
                 }
             }
         }
@@ -59,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -77,7 +76,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <label for="title">Type d'Annonce:</label>
             <input type="text" name="title" required>
         </div>
-        <div style="display:flex; justify-content:start;">
+
+        <div class="form-group">
+            <label for="price">Prix :</label>
+            <div class="price-container">
+                <input type="text" name="price" class="price-input" required>
+            </div>
             <select name="price_period" >
                 <option value="" disabled selected hidden>Sélectionnez une période</option>
                 <option value="total">Total</option>
@@ -86,24 +90,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </select>
         </div>
         <div class="form-group">
-            <label for="price">Prix :</label>
-            <input type="text" name="price" required>
-
-        </div>
-
-        <div class="form-group">
             <label for="address">Adresse :</label>
             <input type="text" name="address" required>
         </div>
 
-        <div class="form-group">
-            <label for="type">Type :</label>
+
+        <div class="lon" style="margin-bottom: 10px;">
+            <label for="price" style="padding-right:95px;">Type: </label>
             <select name="type" required>
                 <option value="" disabled selected hidden>Sélectionnez un type</option>
                 <option value="sell">À vendre</option>
                 <option value="rent">À louer</option>
             </select>
         </div>
+
 
         <div class="form-group file-upload">
             <label for="media">Images (jusqu'à 6) :</label>

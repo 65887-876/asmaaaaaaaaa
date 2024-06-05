@@ -11,20 +11,38 @@ $query = "SELECT homes.*, users.username,
 
 $result = mysqli_query($con, $query);
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <title>Explorateur d'immobilier</title>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
     <!-- Include Slick CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="home-section">
         <h2 class="home-title">Explorer nos immobilier</h2>
+        <div style="display:flex;">
 
+        
+        <!-- Dropdown select for filtering -->
+        <label style="padding-top:10px;" for="title-filter"><h3>Filtrer par titre:</h3></label>
+        <select id="title-filter">
+            <option value="">Tous les titres</option>
+            <?php
+            // Fetch all unique titles from the database
+            $titles_query = mysqli_query($con, "SELECT DISTINCT title FROM homes");
+            while ($title_row = mysqli_fetch_assoc($titles_query)) {
+                echo "<option value='" . htmlspecialchars($title_row['title']) . "'>" . htmlspecialchars($title_row['title']) . "</option>";
+            }
+            ?>
+        </select>
+        </div>
         <div class="home-grid">
             <?php
             if ($result && mysqli_num_rows($result) > 0) {
@@ -94,21 +112,42 @@ $result = mysqli_query($con, $query);
         </div>
     </div>
 
-
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Slick JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('.home-card-slider').slick({
-                dots: true,
-                infinite: true,
-                speed: 300,
-                slidesToShow: 1,
-                adaptiveHeight: true
+    $(document).ready(function(){
+        // Initialize Slick slider
+        $('.home-card-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            adaptiveHeight: true
+        });
+
+        // Handle select change event
+        $('#title-filter').change(function() {
+            var selectedTitle = $(this).val();
+
+            // Send an AJAX request to fetch filtered homes based on selected title
+            $.ajax({
+                url: 'fetch_filtered_homes.php',
+                type: 'POST',
+                data: {title: selectedTitle},
+                success: function(response) {
+                    $('.home-grid').html(response); // Replace existing homes with filtered homes
+                    $('.home-card-slider').slick('unslick'); // Unslick the slider
+                    $('.home-card-slider').slick({ // Reinitialize Slick slider
+                        dots: true,
+                        infinite: true,
+                        speed: 300,
+                        slidesToShow: 1,
+                        adaptiveHeight: true
+                    });
+                }
             });
         });
-    </script>
+    });
+</script>
 </body>
 </html>
