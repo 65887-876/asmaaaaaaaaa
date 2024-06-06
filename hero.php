@@ -2,19 +2,21 @@
 <section class="hero">
     <style>
             .explore-button {
-            background: red;
+            background: transparent;
             color: white;
+            border: solid 1px;
+            width:200px;
 
         }
 
         .explore-button:hover {
-            background: red;
+            background: grey;
             color: black;
         }
 
     </style>
     <div class="hero-content">
-        <h1>Bienvenu a notre site immobilier</h1> 
+        <h1>Bienvenu à notre site immobilier</h1> 
         <button class="explore-button" onclick="window.location.href='explore.php'">
     Explorer
 </button>

@@ -32,6 +32,7 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <?php include 'header.php'; ?>
@@ -78,8 +79,8 @@ $result = mysqli_query($con, $query);
                 echo "<div class='home-card-buttons'>";
                 echo "<form method='POST' action='admin.php'>";
                 echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
-                echo "<button type='submit' name='approve' class='approve-btn'>Approuver</button>";
-                echo "<button type='submit' name='delete' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\">Supprimer</button>";
+                echo "<button type='submit' name='approve' class='approve-btn'><i class='fas fa-check' style='color: #28a745;'></i></button>";
+                echo "<button type='submit' name='delete' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\"><i class='fas fa-trash' style='color: #dc3545;'></i></button>";
                 echo "</form>";
                 echo "</div>";
 
@@ -105,3 +106,4 @@ $result = mysqli_query($con, $query);
     });
 </script>
 </body>
+</html>

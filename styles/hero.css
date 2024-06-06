@@ -3,7 +3,7 @@
         rgba(0, 0, 0, 0.4), /* Reduced opacity for clearer image */
         rgba(0, 0, 0, 0.4)
     ), 
-    url('./OIP (1).jpg'); /* Ensure the correct path to the image */
+    url('./ytur2.jpg'); /* Ensure the correct path to the image */
     background-size: cover; /* Cover the entire area */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Prevent repetition */
@@ -29,8 +29,9 @@
 }
 
 .hero-content h1 {
-    font-size: 48px; /* Large font for the title */
+    font-size: 38px; /* Large font for the title */
     font-weight: bold; /* Bold text for emphasis */
+    width: 700px;
 }
 
 button {

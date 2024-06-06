@@ -68,17 +68,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 <?php include 'header.php'; ?>
 
-<h2>Ajouter votre annonce</h2>
+<h1>Ajouter votre annonce</h1>
 
 <div class="container">
     <form action="add_home.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="title">Type d'Annonce:</label>
+            <label for="title">Type d'Annonce</label>
             <input type="text" name="title" required>
         </div>
 
         <div class="form-group">
-            <label for="price">Prix :</label>
+            <label for="price">Prix </label>
             <div class="price-container">
                 <input type="text" name="price" class="price-input" required>
             </div>
@@ -90,28 +90,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </select>
         </div>
         <div class="form-group">
-            <label for="address">Adresse :</label>
+            <label for="address">Adresse </label>
             <input type="text" name="address" required>
         </div>
 
 
-        <div class="lon" style="margin-bottom: 10px;">
-            <label for="price" style="padding-right:95px;">Type: </label>
-            <select name="type" required>
-                <option value="" disabled selected hidden>Sélectionnez un type</option>
-                <option value="sell">À vendre</option>
-                <option value="rent">À louer</option>
-            </select>
-        </div>
-
+        <div class="lone">
+    <label style="flex:0;" for="price">Type</label>
+    <select name="type" required>
+        <option value="" disabled selected hidden>Sélectionnez un type</option>
+        <option value="sell">À vendre</option>
+        <option value="rent">À louer</option>
+    </select>
+</div>
 
         <div class="form-group file-upload">
-            <label for="media">Images (jusqu'à 6) :</label>
+            <label for="media">Images (jusqu'à 6)</label>
             <input type="file" name="media[]" multiple accept="image/*">
         </div>
 
         <div class="form-group">
-            <label for="description">Description :</label>
+            <label for="description">Description</label>
             <textarea name="description" required></textarea>
         </div>
         

@@ -1,4 +1,4 @@
-/* Copy of admin.css with additional styles from home.css */
+/* General body and container styles */
 body {
     margin: 0;
     padding: 0;
@@ -22,6 +22,7 @@ h2 {
     color: #333;
 }
 
+/* Home grid styles */
 .home-grid {
     display: flex;
     flex-wrap: wrap;
@@ -87,37 +88,40 @@ h2 {
     color: #555;
 }
 
+/* Adjust gap between buttons */
 .home-card-buttons {
-    padding: 15px;
+    padding: 15px 0; /* Adjust padding as needed */
     display: flex;
     justify-content: center;
-    gap: 30px;
     align-items: center;
 }
 
-.home-card-buttons form {
-    margin: 2;
+/* Adjust size of icons */
+.home-card-buttons .approve-btn i,
+.home-card-buttons .delete-btn i {
+    font-size: 24px; /* Adjust size as needed */
 }
 
-.home-card-buttons .approve-btn,
+/* Add gap between buttons */
 .home-card-buttons .delete-btn {
-    background: red;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
+    margin-left: 40px; /* Adjust margin as needed */
 }
 
-.home-card-buttons .approve-btn {
-    background: #28a745;
+/* Button styles */
+.home-card-buttons .approve-btn i {
+    color: #28a745; /* Green color */
 }
 
-.home-card-buttons .delete-btn {
-    background: #dc3545;
+.home-card-buttons .delete-btn i {
+    color: #dc3545; /* Red color */
 }
 
+.home-card-buttons .approve-btn:hover i,
+.home-card-buttons .delete-btn:hover i {
+    color: darken(#28a745, 10%);
+}
+
+/* Footer styles */
 .footer {
     text-align: center;
     padding: 10px;

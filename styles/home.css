@@ -29,7 +29,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     width: calc(33.333% - 20px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Remove box-shadow */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -60,7 +60,20 @@ body {
     font-size: 18px;
     font-weight: bold; /* Fix typo */
 }
-
+button {
+    color: white;
+    width: 100px;
+    height: 60px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
 .home-card-content .type {
     color: black;
     font-size: 24px;
@@ -76,37 +89,65 @@ body {
     padding: 15px;
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 10px; /* Adjust gap as needed */
     align-items: center;
 }
 
 .home-card-buttons form {
-    margin: 2;
+    margin: 0;
 }
 
 .home-card-buttons .edit-btn,
 .home-card-buttons .delete-btn,
-.home-card-buttons .contact-btn {
-    background: red;
-    color: #fff;
+.home-card-buttons .contact-btn,
+.home-card-buttons .favorite-btn {
+    background: none;
+    color: grey;
     border: none;
-    padding: 8px 12px;
+    padding: 0;
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
+    font-size: 20px; /* Adjust size as needed */
+    transition: color 0.3s;
+    box-shadow: none;
+
 }
 
+.home-card-buttons .edit-btn i,
+.home-card-buttons .delete-btn i,
+.home-card-buttons .contact-btn i,
+.home-card-buttons .favorite-btn i {
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: none;
 
-.home-card-buttons .edit-btn {
-    background: #28a745;
 }
 
-.home-card-buttons .delete-btn {
-    background: #dc3545;
+/* Specific icon colors */
+.home-card-buttons .edit-btn i {
+    color: #28a745;
 }
 
-.home-card-buttons .contact-btn {
-    background: #17a2b8;
+.home-card-buttons .delete-btn i {
+    color: #dc3545;
+}
+
+.home-card-buttons .contact-btn i {
+    color: #17a2b8;
+}
+
+.home-card-buttons .favorite-btn i {
+    color: grey;
+}
+
+.home-card-buttons .favorite-btn:hover i {
+    color: red;
+}
+
+.home-card-buttons .favorite-btn.clicked i {
+    color: red;
 }
 
 /* Swiper styles */
@@ -115,80 +156,11 @@ body {
     height: 300px;
 }
 
-/* Button styles */
-.home-card-buttons {
-    padding: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    align-items: center;
-}
-
-.home-card-buttons form {
-    margin: 2;
-}
-
-.home-card-buttons .edit-btn,
-.home-card-buttons .delete-btn,
-.home-card-buttons .contact-btn {
-    background: red;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-/* Button styles */
-.home-card-buttons .favorite-btn {
-    background: #fff; /* White color for the button */
-    color: grey; /* Black color for the heart icon */
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s; /* Smooth transition on hover */
-}
-
-/* Hover effect */
-.home-card-buttons .favorite-btn:hover {
-    background: #f0f0f0; /* Light grey background on hover */
-}
-
-/* Red color for the heart when clicked */
-.home-card-buttons .favorite-btn.clicked {
-    color: #dc3545; /* Red color for the heart icon */
-}
-
-/* Red color for the heart icon on hover */
-.home-card-buttons .favorite-btn:hover i {
-    color: #dc3545; /* Red color for the heart icon on hover */
-}
-
-.home-card-buttons .edit-btn {
-    background: #28a745;
-}
-
-.home-card-buttons .delete-btn {
-    background: #dc3545;
-}
-
-.home-card-buttons .contact-btn {
-    background: #17a2b8;
-}
-
-/* Swiper styles */
-.swiper-container {
-    width: 100%;
-    height: 260px;
-}
-
 /* Update the Swiper styles to hide only the pagination dots */
 .swiper-container .swiper-pagination {
     display: none;
 }
+
 /* Update the styles for .swiper-slide to center the images horizontally */
 .swiper-slide {
     display: flex;
@@ -196,31 +168,9 @@ body {
     align-items: center;
     background: #f9f9f9;
 }
-#title-filter {
-    margin-bottom:  50px;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-    color: black;
-    cursor: pointer;
-  }
-  
-  #title-filter option {
-    padding: 12px;
-    font-size: 12px;
-    background-color: #fff;
-    color: #333;
-  }
-  
-  #title-filter option:hover {
-    background-color: #f0f0f0;
-  }
-  
 
-  .type-filtrer{
-    margin-bottom:  50px;
+#title-filter {
+    margin-bottom: 50px;
     padding: 12px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -228,16 +178,37 @@ body {
     background-color: #fff;
     color: black;
     cursor: pointer;
-  }
-  
-  .type-filtrer option {
+}
+
+#title-filter option {
     padding: 12px;
     font-size: 12px;
     background-color: #fff;
     color: #333;
-  }
-  
-  .type-filtrer option:hover {
+}
+
+#title-filter option:hover {
     background-color: #f0f0f0;
-  }
-  
+}
+
+.type-filtrer {
+    margin-bottom: 50px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: black;
+    cursor: pointer;
+}
+
+.type-filtrer option {
+    padding: 12px;
+    font-size: 12px;
+    background-color: #fff;
+    color: #333;
+}
+
+.type-filtrer option:hover {
+    background-color: #f0f0f0;
+}

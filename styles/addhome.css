@@ -3,10 +3,9 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    position: relative;
 }
 
-h2 {
+h1 {
     text-align: center;
     color: #333;
 }
@@ -18,10 +17,12 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     margin: 0 auto;
+    
 }
 
 .form-group {
     display: flex;
+    justify-content: center;
     align-items: center;
     margin-bottom: 10px;
 }
@@ -38,6 +39,8 @@ label {
     flex: 1;
     font-weight: bold;
     margin-right: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 input[type="text"],
@@ -100,4 +103,16 @@ button[name="delete"]:hover {
 }
 .image-container {
     margin-bottom: 10px;
+}
+.container{
+    margin: 30px;
+}
+
+.lone {
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Align items vertically centered */
+    gap: 55px; /* No gap between items */
+    margin-left:50px;
 }
