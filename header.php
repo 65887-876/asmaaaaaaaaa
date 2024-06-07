@@ -100,8 +100,9 @@ $loggedIn = isset($_SESSION['user_id']);
 <body>
     <header>
         <div class="header-container">
-            <div class="logo">
+            <div class="logo" style='display:flex; align-items:center;'>
                 <a href="index.php"><img src="logo.jpg" alt="Skikda Immobilier Logo"></a>
+                <h3 style='padding-bottom:3px;'>imo-skikda</h3>
             </div>
             <nav>
                 <ul class="nav-links">

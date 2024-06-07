@@ -182,7 +182,7 @@ button {
 
 #title-filter option {
     padding: 8px;
-    font-size: 12px;
+    font-size: 14px;
     background-color: #fff;
     color: #333;
 }
@@ -204,7 +204,7 @@ button {
 
 .type-filtrer option {
     padding: 8px;
-    font-size: 8px;
+    font-size: 14px;
     background-color: #fff;
     color: #333;
 }

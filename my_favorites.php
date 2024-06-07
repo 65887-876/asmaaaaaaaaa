@@ -33,17 +33,14 @@ $result = mysqli_query($con, $query);
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Définir la hauteur minimale du corps à 100 % de la hauteur de la fenêtre */
             margin: 0;
         }
 
-        /* Conteneur principal */
         .main-content {
-            flex: 1; /* S'étend pour remplir l'espace disponible */
-            padding-bottom: 50px; /* Ajuster au besoin pour s'adapter au pied de page */
+            flex: 0;
+            padding-bottom: 50px;
         }
 
-        /* Styles des messages de succès */
         .success-message {
             background-color: #d4edda;
             color: #155724;
@@ -55,7 +52,6 @@ $result = mysqli_query($con, $query);
             font-weight: bold;
         }
 
-        /* Styles de la section des maisons */
         .home-section {
             padding: 20px;
         }
@@ -65,7 +61,6 @@ $result = mysqli_query($con, $query);
             margin-bottom: 20px;
         }
 
-        /* Styles de la grille */
         .home-grid {
             display: flex;
             flex-wrap: wrap;
@@ -73,6 +68,9 @@ $result = mysqli_query($con, $query);
         }
 
         .home-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -83,15 +81,15 @@ $result = mysqli_query($con, $query);
 
         .home-card img,
         .home-card video {
-            height: 280px; /* Définir la hauteur à 280px */
+            height: 280px;
             width: 100%;
             object-fit: cover;
         }
 
-        /* Mettre à jour les styles pour le contenu de la carte */
         .home-card-content {
             padding: 15px;
-            position: relative; /* Assurer que le z-index fonctionne */
+            flex-grow: 1;
+            gap:1px;
         }
 
         .home-card-content h3 {
@@ -115,7 +113,6 @@ $result = mysqli_query($con, $query);
             color: #555;
         }
 
-        /* Styles des boutons */
         .home-card-buttons {
             padding: 15px;
             display: flex;
@@ -125,7 +122,7 @@ $result = mysqli_query($con, $query);
         }
 
         .home-card-buttons form {
-            margin: 2;
+            margin: 0;
         }
 
         .home-card-buttons .edit-btn,
@@ -139,66 +136,62 @@ $result = mysqli_query($con, $query);
             cursor: pointer;
             text-decoration: none;
         }
-        /* Styles des boutons */
+
         .home-card-buttons .favorite-btn {
-            background: #fff; /* Couleur blanche pour le bouton */
-            color: red; /* Couleur noire pour l'icône du cœur */
+            background: #fff;
+            color: red;
             border: none;
             padding: 8px 12px;
             border-radius: 4px;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color 0.3s; /* Transition douce au survol */
+            transition: background-color 0.3s;
         }
 
-        /* Effet de survol pour le bouton favori */
         .home-card-buttons .favorite-btn:hover {
-            color: grey; /* Changer la couleur de l'icône du cœur en rouge au survol */
+            color: grey;
         }
-        /* Couleur rouge pour le cœur lorsqu'il est cliqué */
+
         .home-card-buttons .favorite-btn.clicked {
-            color: grey; /* Couleur rouge pour l'icône du cœur */
+            color: grey;
         }
 
         .home-card-buttons .edit-btn {
-            background: #fff; /* Couleur blanche pour le bouton */
-            color: green; /* Couleur noire pour l'icône du cœur */
+            background: #fff;
+            color: green;
             border: none;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color 0.3s; /* Transition douce au survol */
+            transition: background-color 0.3s;
         }
 
         .home-card-buttons .delete-btn {
-            background: #fff; /* Couleur blanche pour le bouton */
-            color: red; /* Couleur noire pour l'icône du cœur */
+            background: #fff;
+            color: red;
             border: none;
             padding: 8px 12px;
             border-radius: 4px;
             cursor: pointer;
             text-decoration: none;
-            transition: background-color 0.3s; /* Transition douce au survol */
+            transition: background-color 0.3s;
         }
 
         .home-card-buttons .contact-btn {
             background: #17a2b8;
         }
 
-        /* Styles du carrousel */
         .swiper-container {
             width: 100%;
             height: 260px;
         }
 
-        /* Mettre à jour les styles du carrousel pour masquer uniquement les points de pagination */
         .swiper-container .swiper-pagination {
             display: none;
         }
 
-        /* Mettre à jour les styles pour centrer les images horizontalement */
         .swiper-slide {
             display: flex;
-            justify-content: center; /* Centrer horizontalement */
+            justify-content: center;
             align-items: center;
             background: #f9f9f9;
         }

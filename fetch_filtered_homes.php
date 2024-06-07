@@ -49,7 +49,7 @@ if (isset($_POST['title']) && isset($_POST['type'])) {
 
             echo "<div class='home-card-content'>";
             echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
-            echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN";
+            echo "<p class='price'>" . htmlspecialchars($home['price']) . " DA";
             if ($home['type'] === 'rent') {
                 echo " / " . htmlspecialchars($home['price_period']);
             }
@@ -67,13 +67,13 @@ if (isset($_POST['title']) && isset($_POST['type'])) {
             echo "</form>";
 
             if ($user_id && $home['user_id'] === $user_id) {
-                echo "<button class='edit-btn' onclick=\"window.location.href='edit_home.php?home_id=" . htmlspecialchars($home['id']) . "'\">✎ Modifier</button>";
+                echo "<button class='edit-btn' onclick=\"window.location.href='edit_home.php?home_id=" . htmlspecialchars($home['id']) . "'\"><i class='fas fa-edit'></i></button>";
                 echo "<form action='delete_home.php' method='POST' style='display:inline-block;'>";
                 echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
-                echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\">🗑 Supprimer</button>";
+                echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\"><i class='fas fa-trash'></i></button>";
                 echo "</form>";
             } else {
-                echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'>Contacter le Vendeur</a>";
+                echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'><i class='fas fa-envelope'></i></a>";
             }
 
             echo "</div>";
@@ -90,7 +90,6 @@ if (isset($_POST['title']) && isset($_POST['type'])) {
     echo "<p>Erreur: Aucun filtre sélectionné.</p>";
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">

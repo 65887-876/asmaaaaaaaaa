@@ -27,10 +27,10 @@ $result = mysqli_query($con, $query);
     <div class="home-section">
         <h2 class="home-title" style="font-size:40px;">Explorer nos immobilier</h2>
         <div style="display:flex;">
-    <label style="padding-top:33px;padding-right:18px;" ><h3 style='color:black;'>filtrer par:</h3></label>
+    <label style="padding-top:27px;padding-right:18px;" ><h3 style='color:black;'>filtrer par:</h3></label>
     <div style="display:flex;flex-direction:column;">
     <h4 style="display:flex;justify-content:center;">Categorie</h4>        
-    <select  style='width:95px;height:43px;' id="title-filter">
+    <select id="title-filter">
         <option value="">Tous</option>
         <?php
         $titles_query = mysqli_query($con, "SELECT DISTINCT title FROM homes");
@@ -44,7 +44,7 @@ $result = mysqli_query($con, $query);
 
 
     <h4 style="display:flex;justify-content:center;" >V/L</h4>
-    <select style='width:95px;height:43px;' id="type-filter" class="type-filtrer">
+    <select id="type-filter" class="type-filtrer">
         <option value="">Tous</option>
         <option value="sell">À vendre</option>
         <option value="rent">À louer</option>

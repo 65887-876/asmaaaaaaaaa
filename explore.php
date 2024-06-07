@@ -18,11 +18,13 @@ $result = mysqli_query($con, $query);
 <head>
     <title>Explorer les Maisons</title>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .add-house-card {
             background-color: #f9f9f9;
-            border: 2px dashed #ccc; /* Add a dashed border */
+            border: 2px dashed #ccc;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             overflow: hidden;
@@ -33,8 +35,8 @@ $result = mysqli_query($con, $query);
             padding: 40px;
             text-align: center;
             transition: transform 0.3s ease-in-out;
-            width: 300px; /* Set a fixed width to match the width of other cards */
-            margin: 10px; /* Add margin to match the spacing between other cards */
+            width: 300px;
+            margin: 10px;
         }
         .add-house-card:hover {
             transform: scale(1.05);
@@ -50,6 +52,66 @@ $result = mysqli_query($con, $query);
             font-size: 18px;
             margin: 0;
             color: #333;
+        }
+
+        .home-card-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            align-items: center;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        .home-card-buttons form,
+        .home-card-buttons a {
+            margin: 0;
+            padding: 0;
+        }
+
+        .contact-btn,
+        .delete-btn,
+        .edit-btn {
+            background: none;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .contact-btn {
+            color: #007bff;
+        }
+
+        .contact-btn:hover {
+            color: #0056b3;
+        }
+
+        .delete-btn {
+            color: #ff4c4c;
+        }
+
+        .delete-btn:hover {
+            color: #ff1a1a;
+        }
+
+        .edit-btn {
+            color: #007bff;
+        }
+
+        .edit-btn:hover {
+            color: #0056b3;
+        }
+
+        .slick-slide img {
+            width: 100%;
+            height: 260px;
+        }
+
+        .slick-slider {
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -71,11 +133,10 @@ $result = mysqli_query($con, $query);
                     $media_files = json_decode($home['media'], true);
                     echo "<div class='home-card'>";
                     if (!empty($media_files)) {
-                        echo "<div class='swiper-container'>";
-                        echo "<div class='swiper-wrapper'>";
+                        echo "<div class='slick-slider'>";
                         foreach ($media_files as $file) {
                             $file_extension = pathinfo($file, PATHINFO_EXTENSION);
-                            echo "<div class='swiper-slide'>";
+                            echo "<div>";
                             if (in_array(strtolower($file_extension), ["jpg", "jpeg", "png", "gif"])) {
                                 echo "<img src='" . htmlspecialchars($file) . "' alt='" . htmlspecialchars($home['title']) . "'>";
                             } elseif (in_array(strtolower($file_extension), ["mp4", "mov", "avi"])) {
@@ -84,13 +145,11 @@ $result = mysqli_query($con, $query);
                             echo "</div>";
                         }
                         echo "</div>";
-                        // Removed the navigation buttons
-                        echo "</div>";
                     }
 
                     echo "<div class='home-card-content'>";
                     echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
-                    echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN</p>";
+                    echo "<p class='price'>" . htmlspecialchars($home['price']) . " DA</p>";
                     echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
                     echo "<p>" . htmlspecialchars($home['description']) . "</p>";
                     echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
@@ -100,13 +159,13 @@ $result = mysqli_query($con, $query);
                     echo "<div class='home-card-buttons'>"; 
                     
                     // Lien pour contacter le vendeur
-                    echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'>Contacter le Vendeur</a>"; 
+                    echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'><i class='fas fa-envelope'></i></a>"; 
 
                     // Bouton Supprimer uniquement pour le propriétaire
                     if ($user_id && $home['user_id'] === $user_id) {
                         echo "<form action='delete_home.php' method='POST' style='display:inline-block;'>";
                         echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
-                        echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\">🗑 Supprimer</button>";
+                        echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\"><i class='fas fa-trash'></i></button>";
                         echo "</form>";
                     }
                     
@@ -115,17 +174,23 @@ $result = mysqli_query($con, $query);
                     echo "</div>"; // Fin de la carte
                 }
             } else {
-                echo "<p>Aucune maison disponible actuellement.</p>"; 
+                echo "<p>Aucune annonce disponible actuellement.</p>"; 
             }
             ?>
         </div> 
     </div>
     <?php include 'footer.php'; ?> 
-
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
-        var swiper = new Swiper('.swiper-container', {
-            // Removed navigation parameters
+        $(document).ready(function(){
+            $('.slick-slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 1,
+                adaptiveHeight: true
+            });
         });
     </script>
 </body>

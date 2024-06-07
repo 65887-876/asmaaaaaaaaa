@@ -64,6 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Ajouter une Maison ou une Villa</title>
     <link rel="stylesheet" href="styles/addhome.css">
+    <style>
+        .footer-container{
+            margin-top:80px;
+        }
+    </style>
 </head>
 <body>
 <?php include 'header.php'; ?>
@@ -71,13 +76,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <h1>Ajouter votre annonce</h1>
 
 <div class="container">
-    <form action="add_home.php" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
+    <form action="add_home.php" method="POST"  enctype="multipart/form-data">
+        <div class="form-group" style='height:50px;' >
             <label for="title">Type d'Annonce</label>
             <input type="text" name="title" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style='padding-right:55px;height:50px;'>
             <label for="price">Prix </label>
             <div class="price-container">
                 <input type="text" name="price" class="price-input" required>
@@ -89,27 +94,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <option value="par ans">Par an</option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" style='height:50px;'>
             <label for="address">Adresse </label>
             <input type="text" name="address" required>
         </div>
 
 
-        <div class="lone">
+        <div class="lone"   style='padding-left:28px;height:50px;'>
     <label style="flex:0;" for="price">Type</label>
-    <select name="type" required>
+    <select style = 'margin-left:24px;' name="type" required>
         <option value="" disabled selected hidden>Sélectionnez un type</option>
         <option value="sell">À vendre</option>
         <option value="rent">À louer</option>
     </select>
 </div>
 
-        <div class="form-group file-upload">
-            <label for="media">Images (jusqu'à 6)</label>
+        <div style='padding-right:200px; height:50px;' class="form-group file-upload">
+            <label for="media">Images</label>
             <input type="file" name="media[]" multiple accept="image/*">
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style='height:100px;'>
             <label for="description">Description</label>
             <textarea name="description" required></textarea>
         </div>

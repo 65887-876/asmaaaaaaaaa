@@ -112,16 +112,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <h2>Modifier votre annonce</h2>
     
     <form action="edit_home.php?home_id=<?php echo htmlspecialchars($home_id); ?>" method="POST" class="container" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="title">Type d'Annonce:</label>
+    <div class="form-group" style='height:70px;'>
+        <label style='padding-left:55px;' for="title">Type d'Annonce</label>
         <div class="input-container">
             <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required>
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="price">Prix :</label>
-        <div class="input-container" style="width:100px; margin-right:160px;">
+    <div class="form-group" style='height:70px;'>
+        <label style='padding-left:55px;' for="price">Prix</label>
+        <div class="input-container" style="width:75px; margin-right:160px;">
             <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required>
         </div>
         <select name="price_period" >
@@ -131,29 +131,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <option value="par ans">Par an</option>
             </select>
     </div>
-    <div class="form-group">
-        <label for="address">Adresse :</label>
+    <div class="form-group" style='height:70px;'>
+        <label style='padding-left:55px;' for="address">Adresse</label>
         <div class="input-container">
             <input type="text" name="address" value="<?php echo isset($home['address']) ? htmlspecialchars($home['address']) : ''; ?>" required>
         </div>
     </div>
-    <div style = "display: flex;padding-bottom:10px;">
-            <label for="type">Type :</label>
+    <div style = "display: flex;padding-bottom:10px;height:20px;">
+            <label  style='padding-left:55px;' for="type">Type</label>
             <select name="type" required>
                 <option value="" disabled selected hidden>Sélectionnez un type</option>
                 <option value="sell">À vendre</option>
                 <option value="rent">À louer</option>
             </select>
         </div>
-    <div class="form-group">
-        <label for="media">Photos (jusqu'à 6) :</label>
-        <input type="file" name="media[]" multiple accept="image/*">
+    <div class="form-group" style='height:70px;padding-left:55px;'>
+        <label for="media">Images</label>
+        <input style='padding-left:15px;' type="file" name="media[]" multiple accept="image/*">
     </div>
 
 
     <?php if (!empty($home['media'])): ?>
     <div class="form-group">
-        <label>choisir pour suprimer:</label>
+        <label style='padding-left:55px;''>cocher pour suprimmer </label>
         <?php $media_paths = json_decode($home['media'], true); ?>
         <?php foreach ($media_paths as $key => $path): ?>
             <input type="hidden" name="existing_media[]" value="<?php echo $path; ?>">
@@ -168,8 +168,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 
-    <div class="form-group">
-        <label for="description">Description :</label>
+    <div  style='padding-left:55px;' class="form-group">
+        <label for="description">Description</label>
         <div class="input-container">
             <textarea name="description" required><?php echo isset($home['description']) ? htmlspecialchars($home['description']) : ''; ?></textarea>
         </div>

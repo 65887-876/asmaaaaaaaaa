@@ -1,13 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
 /* Add the existing styles */
 .add-house-card {
     display: flex; /* Flex layout */
     flex-direction: column; /* Vertical alignment */
     justify-content: center; /* Center align */
     align-items: center; /* Center align */
-    border: 2px dashed #ccc; /* Dashed border to indicate adding */
     border-radius: 10px; /* Rounded corners */
     background: #f9f9f9; /* Light background */
-    height: 200px; /* Fixed height */
     cursor: pointer; /* Indicate clickability */
     transition: background 0.3s; /* Smooth transition on hover */
 }
