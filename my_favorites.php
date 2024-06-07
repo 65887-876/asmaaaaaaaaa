@@ -25,6 +25,7 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <style>
@@ -141,7 +142,7 @@ $result = mysqli_query($con, $query);
         /* Styles des boutons */
         .home-card-buttons .favorite-btn {
             background: #fff; /* Couleur blanche pour le bouton */
-            color: grey; /* Couleur noire pour l'icône du cœur */
+            color: red; /* Couleur noire pour l'icône du cœur */
             border: none;
             padding: 8px 12px;
             border-radius: 4px;
@@ -152,19 +153,31 @@ $result = mysqli_query($con, $query);
 
         /* Effet de survol pour le bouton favori */
         .home-card-buttons .favorite-btn:hover {
-            color: red; /* Changer la couleur de l'icône du cœur en rouge au survol */
+            color: grey; /* Changer la couleur de l'icône du cœur en rouge au survol */
         }
         /* Couleur rouge pour le cœur lorsqu'il est cliqué */
         .home-card-buttons .favorite-btn.clicked {
-            color: red; /* Couleur rouge pour l'icône du cœur */
+            color: grey; /* Couleur rouge pour l'icône du cœur */
         }
 
         .home-card-buttons .edit-btn {
-            background: #28a745;
+            background: #fff; /* Couleur blanche pour le bouton */
+            color: green; /* Couleur noire pour l'icône du cœur */
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s; /* Transition douce au survol */
         }
 
         .home-card-buttons .delete-btn {
-            background: #dc3545;
+            background: #fff; /* Couleur blanche pour le bouton */
+            color: red; /* Couleur noire pour l'icône du cœur */
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s; /* Transition douce au survol */
         }
 
         .home-card-buttons .contact-btn {
@@ -236,26 +249,26 @@ $result = mysqli_query($con, $query);
                     }
                     echo "<div class='home-card-content'>";
                     echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
-                    echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN</p>";
+                    echo "<p class='price'>" . htmlspecialchars($home['price']) . " DA</p>";
                     echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
                     echo "<p>" . htmlspecialchars($home['description']) . "</p>";
                     echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
                     echo "</div>";
 
                     echo "<div class='home-card-buttons'>";
-                    echo "<form action='favorite_handler.php' method='POST'>";
+                    echo "<form action='favorite_handler.php' method='POST' style='display:inline-block;'>";
                     echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
                     echo "<button type='submit' class='favorite-btn'><i class='fas fa-heart'></i></button>";
                     echo "</form>";
 
                     if ($user_id && $home['user_id'] === $user_id) {
-                        echo "<button class='edit-btn' onclick=\"window.location.href='edit_home.php?home_id=" . htmlspecialchars($home['id']) . "'\">✎ Modifier</button>";
+                        echo "<button class='edit-btn' onclick=\"window.location.href='edit_home.php?home_id=" . htmlspecialchars($home['id']) . "'\"><i class='fas fa-edit'></i></button>";
                         echo "<form action='delete_home.php' method='POST' style='display:inline-block;'>";
                         echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
-                        echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\">🗑 Supprimer</button>";
+                        echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\"><i class='fas fa-trash'></i></button>";
                         echo "</form>";
                     } else {
-                        echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'>Contacter le Vendeur</a>";
+                        echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'><i class='fas fa-envelope'></i></a>";
                     }
 
                     echo "</div>";
@@ -267,8 +280,6 @@ $result = mysqli_query($con, $query);
             ?>
         </div>
     </div>
-
-
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>

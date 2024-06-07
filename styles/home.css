@@ -171,7 +171,7 @@ button {
 
 #title-filter {
     margin-bottom: 50px;
-    padding: 12px;
+    padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -181,7 +181,7 @@ button {
 }
 
 #title-filter option {
-    padding: 12px;
+    padding: 8px;
     font-size: 12px;
     background-color: #fff;
     color: #333;
@@ -193,7 +193,7 @@ button {
 
 .type-filtrer {
     margin-bottom: 50px;
-    padding: 12px;
+    padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -203,8 +203,8 @@ button {
 }
 
 .type-filtrer option {
-    padding: 12px;
-    font-size: 12px;
+    padding: 8px;
+    font-size: 8px;
     background-color: #fff;
     color: #333;
 }

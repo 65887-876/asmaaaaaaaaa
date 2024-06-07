@@ -63,7 +63,7 @@ $result = mysqli_query($con, $query);
 
                 echo "<div class='home-card-content'>";
                 echo "<h3>" . htmlspecialchars($home['title']) . "</h3>";
-                echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN";
+                echo "<p class='price'>" . htmlspecialchars($home['price']) . " DA";
 
                 if ($home['type'] === 'rent') {
                     echo " / " . htmlspecialchars($home['price_period']);

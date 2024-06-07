@@ -30,7 +30,7 @@ $result = mysqli_query($con, $query);
     <label style="padding-top:33px;padding-right:18px;" ><h3 style='color:black;'>filtrer par:</h3></label>
     <div style="display:flex;flex-direction:column;">
     <h4 style="display:flex;justify-content:center;">Categorie</h4>        
-    <select id="title-filter">
+    <select  style='width:95px;height:43px;' id="title-filter">
         <option value="">Tous</option>
         <?php
         $titles_query = mysqli_query($con, "SELECT DISTINCT title FROM homes");
@@ -44,8 +44,8 @@ $result = mysqli_query($con, $query);
 
 
     <h4 style="display:flex;justify-content:center;" >V/L</h4>
-    <select id="type-filter" class="type-filtrer">
-        <option value="">tous</option>
+    <select style='width:95px;height:43px;' id="type-filter" class="type-filtrer">
+        <option value="">Tous</option>
         <option value="sell">À vendre</option>
         <option value="rent">À louer</option>
     </select>
@@ -81,7 +81,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
         echo "<div class='home-card-content'>";
         echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
-        echo "<p class='price'>" . htmlspecialchars($home['price']) . " DZN";
+        echo "<p class='price'>" . htmlspecialchars($home['price']) . " DA";
 
         if ($home['type'] === 'rent') {
             echo " / " . htmlspecialchars($home['price_period']);

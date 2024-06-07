@@ -17,10 +17,8 @@ $loggedIn = isset($_SESSION['user_id']);
     <style>
         header {
             background: white;
-            padding: 20px 40px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-bottom: solid 1px #e0e0e0;
-            height: 100px;
         }
 
         .header-container {
@@ -30,12 +28,6 @@ $loggedIn = isset($_SESSION['user_id']);
             background-color: white;
         }
 
-        .logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
 
         .nav-links {
             list-style: none;
@@ -98,12 +90,19 @@ $loggedIn = isset($_SESSION['user_id']);
             background: green;
             color: white;
         }
+        .logo img {
+    width: 100px; /* Increased width */
+    height: auto; /* Maintain aspect ratio */
+}
+
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <h3>Skikda Immobilier</h3>
+            <div class="logo">
+                <a href="index.php"><img src="logo.jpg" alt="Skikda Immobilier Logo"></a>
+            </div>
             <nav>
                 <ul class="nav-links">
                     <li <?php if ($currentPage === 'index'): ?>class="current-page"<?php endif; ?>><a href="index.php">Accueil</a></li>
