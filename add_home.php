@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <option value="" disabled selected hidden>Sélectionnez une période</option>
         <option value="par jour">par jour</option>
         <option value="par mois">Par mois</option>
-        <option value="par ans">Par an</option>
+        <option value="par an">Par an</option>
     </select>
     </div>
     <div style='padding-right:200px; height:50px;' class="form-group file-upload">
