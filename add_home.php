@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $description = $_POST['description'];
     $address = $_POST['address'];
     $price = $_POST['price'];
-    $price_period = $_POST['price_period'];
+    $price_period = isset($_POST['price_period']) ? $_POST['price_period'] : ""; // Check if price period is set
     $type = $_POST['type'];
     $media_paths = [];
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "Vous pouvez télécharger jusqu'à 6 fichiers.";
     }
 
-    if (!empty($title) && !empty($description) && !empty($price) && !empty($price_period) && !empty($type) && !empty($address) && !empty($media_paths)) {
+    if (!empty($title) && !empty($description) && !empty($price) && !empty($type) && !empty($address) && !empty($media_paths)) {
         $media_paths_json = json_encode($media_paths);
         $query = "INSERT INTO homes (user_id, title, description, address, price, price_period, type, media, approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)";
         if ($stmt = mysqli_prepare($con, $query)) {
@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
