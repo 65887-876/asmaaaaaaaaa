@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="styles/footer.css">
 <div class="footer-container">
     <div class="footer-section">
@@ -6,8 +7,8 @@
         <p>Téléphone : 0712345678</p>
     </div>
 
-    <div class="footer-section">
-        <h4>Liens Rapides</h4>
+    <div class="footer-section" style='align-items:center;'>
+        <h4 style='padding-right:0px;'>Liens Rapides</h4>
         <ul class="footer-links">
         <li><a href="index.php">Accueil</a></li>
 
