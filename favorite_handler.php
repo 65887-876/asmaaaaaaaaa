@@ -19,12 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // If it's already in favorites, remove it
         $delete_query = "DELETE FROM favorites WHERE user_id = '$user_id' AND home_id = '$home_id'";
         mysqli_query($con, $delete_query);
-        $_SESSION['favorite_message'] = 'Maison retirée des favoris.';
+        $_SESSION['favorite_message'] = 'Annonce retirée des favoris.';
     } else {
         // If it's not in favorites, add it
         $insert_query = "INSERT INTO favorites (user_id, home_id) VALUES ('$user_id', '$home_id')";
         mysqli_query($con, $insert_query);
-        $_SESSION['favorite_message'] = 'Maison ajoutée aux favoris.';
+        $_SESSION['favorite_message'] = 'Annonce ajoutée aux favoris.';
     }
 
     header("Location: my_favorites.php");

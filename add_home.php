@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <title>Ajouter une Maison ou une Villa</title>
+    <title>Ajouter une annonce</title>
     <link rel="stylesheet" href="styles/addhome.css">
     <style>
     .footer-container {
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <option value="" disabled selected hidden>Sélectionnez une période</option>
         <option value="par jour">par jour</option>
         <option value="par mois">Par mois</option>
-        <option value="par ans">Par an</option>
+        <option value="par ans">Par ans</option>
     </select>
     </div>
     <div style='padding-right:200px; height:50px;' class="form-group file-upload">
