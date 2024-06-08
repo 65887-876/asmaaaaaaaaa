@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         </div>
         <div class="risk">
             <p><a href="index.php">Retour à l'Accueil</a></p> 
-            <button type="submit">Mettre à Jour l'annonce'</button>
+            <button type="submit">Mettre à Jour l'annonce</button>
         </div>
     </form>
 
