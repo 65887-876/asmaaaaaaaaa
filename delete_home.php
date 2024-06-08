@@ -27,10 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             header("Location: index.php");
             die;
         } else {
-            echo "Error deleting home: " . mysqli_error($con);
+            echo "Annonce error" . mysqli_error($con);
         }
     } else {
-        echo "Home not found or you do not have permission to delete this home.";
+        echo "Annonce non trouvée ou vous n'avez pas la permission de supprimer cette Annonce.";
+
     }
 }
 ?>

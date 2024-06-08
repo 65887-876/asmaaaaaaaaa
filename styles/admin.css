@@ -20,6 +20,8 @@ h2 {
     text-align: center;
     margin-top: 30px;
     color: #333;
+    margin:0px;
+
 }
 
 /* Home grid styles */
@@ -71,6 +73,7 @@ h2 {
     color: orange;
     font-size: 18px;
     font-weight: bold;
+    margin: 0px;
 }
 
 .home-card-content .price-periode {
@@ -86,6 +89,7 @@ h2 {
 .home-card-content .posted-by {
     font-size: 14px;
     color: #555;
+    padding-top: 8px;
 }
 
 /* Adjust gap between buttons */

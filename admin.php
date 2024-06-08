@@ -73,14 +73,14 @@ $result = mysqli_query($con, $query);
                 echo "<h3>" . htmlspecialchars($home['address']) . "</h3>";
                 echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
                 echo "<p>" . htmlspecialchars($home['description']) . "</p>";
-                echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
+                echo "<p style='font-weight:bolder;' class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
                 echo "</div>";
 
                 echo "<div class='home-card-buttons'>";
                 echo "<form method='POST' action='admin.php'>";
                 echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
                 echo "<button type='submit' name='approve' class='approve-btn'><i class='fas fa-check' style='color: #28a745;'></i></button>";
-                echo "<button type='submit' name='delete' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\"><i class='fas fa-trash' style='color: #dc3545;'></i></button>";
+                echo "<button type='submit' name='delete' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette Annonce?');\"><i class='fas fa-trash' style='color: #dc3545;'></i></button>";
                 echo "</form>";
                 echo "</div>";
 

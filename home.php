@@ -109,7 +109,7 @@ if ($result && mysqli_num_rows($result) > 0) {
             echo "<button class='edit-btn' onclick=\"window.location.href='edit_home.php?home_id=" . htmlspecialchars($home['id']) . "'\"><i class='fas fa-edit'></i></button>";
             echo "<form action='delete_home.php' method='POST' style='display:inline-block;'>";
             echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
-            echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette maison?');\"><i class='fas fa-trash'></i></button>";
+            echo "<button type='submit' class='delete-btn' onclick=\"return confirm('Êtes-vous sûr de vouloir supprimer cette Annonce?');\"><i class='fas fa-trash'></i></button>";
             echo "</form>";
         } else {
             echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'><i class='fas fa-envelope'></i></a>";

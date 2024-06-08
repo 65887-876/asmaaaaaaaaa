@@ -127,12 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <div class="input-container" style="width:75px; margin-right:160px;">
                 <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required>
             </div>
-            <select id="price-period" name="price_period" class="<?php echo isset($home['type']) && $home['type'] === 'rent' ? '' : 'hidden'; ?>">
-                <option value="" disabled selected hidden>Sélectionnez une période</option>
-                <option value="par jour" <?php echo isset($home['price_period']) && $home['price_period'] === 'par jour' ? 'selected' : ''; ?>>Par jour</option>
-                <option value="par mois" <?php echo isset($home['price_period']) && $home['price_period'] === 'par mois' ? 'selected' : ''; ?>>Par mois</option>
-                <option value="par ans" <?php echo isset($home['price_period']) && $home['price_period'] === 'par ans' ? 'selected' : ''; ?>>Par an</option>
-            </select>
+
         </div>
 
         <div class="form-group" style='height:70px;'>
@@ -142,6 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
         </div>
 
+
         <div style="display: flex;padding-bottom:10px;height:40px;">
             <label style='padding-left:55px;padding-top:10px;' for="type">Type</label>
             <select id="type-select" name="type" required>
@@ -150,7 +146,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 <option value="rent" <?php echo isset($home['type']) && $home['type'] === 'rent' ? 'selected' : ''; ?>>À louer</option>
             </select>
         </div>
-
+        <div class='form-group' style='padding-left:240px;height:70px;background-color:white;'>
+        <select style='padding:8px;' id="price-period" name="price_period" class="<?php echo isset($home['type']) && $home['type'] === 'rent' ? '' : 'hidden'; ?>">
+                <option value="" disabled selected hidden>Sélectionnez une période</option>
+                <option value="par jour" <?php echo isset($home['price_period']) && $home['price_period'] === 'par jour' ? 'selected' : ''; ?>>Par jour</option>
+                <option value="par mois" <?php echo isset($home['price_period']) && $home['price_period'] === 'par mois' ? 'selected' : ''; ?>>Par mois</option>
+                <option value="par ans" <?php echo isset($home['price_period']) && $home['price_period'] === 'par ans' ? 'selected' : ''; ?>>Par an</option>
+            </select>
+        </div>
         <div class="form-group" style='height:70px;padding-left:55px;'>
             <label for="media">Images</label>
             <input style='padding-left:15px;' type="file" name="media[]" multiple accept="image/*">
