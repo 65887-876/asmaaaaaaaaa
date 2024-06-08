@@ -22,6 +22,11 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+.home-card-content {
+    margin:-5px;
+}
+    </style>
 </head>
 <body>
     <div class="home-section">
@@ -80,7 +85,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         }
 
         echo "<div class='home-card-content'>";
-        echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
+        echo "<h2 class='title'>" . htmlspecialchars($home['title']) . "</h2>";
         echo "<p class='price'>" . htmlspecialchars($home['price']) . " DA";
 
         if ($home['type'] === 'rent') {
@@ -90,8 +95,8 @@ if ($result && mysqli_num_rows($result) > 0) {
         echo "</p>";
         echo "<h3>" . htmlspecialchars($home['address']) . "</h3>";
         echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
-        echo "<p>" . htmlspecialchars($home['description']) . "</p>";
-        echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
+        echo "<p style='padding-bottom:20px;'>" . htmlspecialchars($home['description']) . "</p>";
+        echo "<h2 class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</h2>";
         echo "</div>";
 
         echo "<div class='home-card-buttons'>";

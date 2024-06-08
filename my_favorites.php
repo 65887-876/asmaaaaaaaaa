@@ -155,7 +155,9 @@ $result = mysqli_query($con, $query);
         .home-card-buttons .favorite-btn.clicked {
             color: grey;
         }
-
+        .home-card-buttons i {
+            font-size: 24px; 
+        }
         .home-card-buttons .edit-btn {
             background: #fff;
             color: green;
@@ -241,11 +243,11 @@ $result = mysqli_query($con, $query);
                         echo "</div>";
                     }
                     echo "<div class='home-card-content'>";
-                    echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
-                    echo "<p class='price'>" . htmlspecialchars($home['price']) . " DA</p>";
+                    echo "<h2 style='margin:0px;'>" . htmlspecialchars($home['title']) . "</h2>";
+                    echo "<p class='price' style='margin:0px;'>" . htmlspecialchars($home['price']) . " DA</p>";
                     echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
-                    echo "<p>" . htmlspecialchars($home['description']) . "</p>";
-                    echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
+                    echo "<p style='padding-bottom:20px;'>" . htmlspecialchars($home['description']) . "</p>";
+                    echo "<h2 class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</h2>";
                     echo "</div>";
 
                     echo "<div class='home-card-buttons'>";

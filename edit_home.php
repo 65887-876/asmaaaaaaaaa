@@ -95,16 +95,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles/edit_home.css">
     <style>
-    .image-container {
-        display: inline-block;
-        vertical-align: top; /* Align images to the top */
-        margin-right: 10px; /* Add some spacing between images */
-    }
-    .image-container img {
-        max-width: 100px; /* Limit the maximum width of images */
-        height: 80px; /* Set a fixed height for all images */
-        object-fit: cover; /* Maintain aspect ratio while covering the container */
-    }
+        .image-container {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 10px;
+        }
+        .image-container img {
+            max-width: 100px;
+            height: 80px;
+            object-fit: cover;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -112,75 +115,84 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <h2>Modifier votre annonce</h2>
     
     <form action="edit_home.php?home_id=<?php echo htmlspecialchars($home_id); ?>" method="POST" class="container" enctype="multipart/form-data">
-    <div class="form-group" style='height:70px;'>
-        <label style='padding-left:55px;' for="title">Type d'Annonce</label>
-        <div class="input-container">
-            <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required>
-        </div>
-    </div>
-
-    <div class="form-group" style='height:70px;'>
-        <label style='padding-left:55px;' for="price">Prix</label>
-        <div class="input-container" style="width:75px; margin-right:160px;">
-            <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required>
-        </div>
-        <select name="price_period" >
-                <option value="" disabled selected hidden>Sélectionnez une période</option>
-                <option value="total">Total</option>
-                <option value="par mois">Par mois</option>
-                <option value="par ans">Par an</option>
-            </select>
-    </div>
-    <div class="form-group" style='height:70px;'>
-        <label style='padding-left:55px;' for="address">Adresse</label>
-        <div class="input-container">
-            <input type="text" name="address" value="<?php echo isset($home['address']) ? htmlspecialchars($home['address']) : ''; ?>" required>
-        </div>
-    </div>
-    <div style = "display: flex;padding-bottom:10px;height:20px;">
-            <label  style='padding-left:55px;' for="type">Type</label>
-            <select name="type" required>
-                <option value="" disabled selected hidden>Sélectionnez un type</option>
-                <option value="sell">À vendre</option>
-                <option value="rent">À louer</option>
-            </select>
-        </div>
-    <div class="form-group" style='height:70px;padding-left:55px;'>
-        <label for="media">Images</label>
-        <input style='padding-left:15px;' type="file" name="media[]" multiple accept="image/*">
-    </div>
-
-
-    <?php if (!empty($home['media'])): ?>
-    <div class="form-group">
-        <label style='padding-left:55px;''>cocher pour suprimmer </label>
-        <?php $media_paths = json_decode($home['media'], true); ?>
-        <?php foreach ($media_paths as $key => $path): ?>
-            <input type="hidden" name="existing_media[]" value="<?php echo $path; ?>">
-            <div class="image-container">
-                <img src="<?php echo htmlspecialchars($path); ?>" alt="Image Actuelle" style="max-width: 100px;"><br>
-                <input type="checkbox" name="delete_image[]" value="<?php echo $key; ?>"> 
-                <label for="delete_image[]"></label> <!-- Trash bin icon -->
+        <div class="form-group" style='height:70px;'>
+            <label style='padding-left:55px;' for="title">Type d'Annonce</label>
+            <div class="input-container">
+                <input type="text" name="title" value="<?php echo isset($home['title']) ? htmlspecialchars($home['title']) : ''; ?>" required>
             </div>
-        <?php endforeach; ?>
-    </div>
-    <?php endif; ?>
-
-
-
-    <div  style='padding-left:55px;' class="form-group">
-        <label for="description">Description</label>
-        <div class="input-container">
-            <textarea name="description" required><?php echo isset($home['description']) ? htmlspecialchars($home['description']) : ''; ?></textarea>
         </div>
-    </div>
-    <div class="risk">
-        <p><a href="index.php">Retour à l'Accueil</a></p> 
-        <button type="submit">Mettre à Jour la Maison</button>
-    </div>
 
-</form>
+        <div class="form-group" style='height:50px;'>
+            <label style='padding-left:55px;' for="price">Prix</label>
+            <div class="input-container" style="width:75px; margin-right:160px;">
+                <input type="text" name="price" value="<?php echo isset($home['price']) ? htmlspecialchars($home['price']) : ''; ?>" required>
+            </div>
+            <select id="price-period" name="price_period" class="<?php echo isset($home['type']) && $home['type'] === 'rent' ? '' : 'hidden'; ?>">
+                <option value="" disabled selected hidden>Sélectionnez une période</option>
+                <option value="par jour" <?php echo isset($home['price_period']) && $home['price_period'] === 'par jour' ? 'selected' : ''; ?>>Par jour</option>
+                <option value="par mois" <?php echo isset($home['price_period']) && $home['price_period'] === 'par mois' ? 'selected' : ''; ?>>Par mois</option>
+                <option value="par ans" <?php echo isset($home['price_period']) && $home['price_period'] === 'par ans' ? 'selected' : ''; ?>>Par an</option>
+            </select>
+        </div>
 
-<?php include 'footer.php'?>
+        <div class="form-group" style='height:70px;'>
+            <label style='padding-left:55px;' for="address">Adresse</label>
+            <div class="input-container">
+                <input type="text" name="address" value="<?php echo isset($home['address']) ? htmlspecialchars($home['address']) : ''; ?>" required>
+            </div>
+        </div>
+
+        <div style="display: flex;padding-bottom:10px;height:40px;">
+            <label style='padding-left:55px;padding-top:10px;' for="type">Type</label>
+            <select id="type-select" name="type" required>
+                <option value="" disabled selected hidden>Sélectionnez un type</option>
+                <option value="sell" <?php echo isset($home['type']) && $home['type'] === 'sell' ? 'selected' : ''; ?>>À vendre</option>
+                <option value="rent" <?php echo isset($home['type']) && $home['type'] === 'rent' ? 'selected' : ''; ?>>À louer</option>
+            </select>
+        </div>
+
+        <div class="form-group" style='height:70px;padding-left:55px;'>
+            <label for="media">Images</label>
+            <input style='padding-left:15px;' type="file" name="media[]" multiple accept="image/*">
+        </div>
+
+        <?php if (!empty($home['media'])): ?>
+            <div class="form-group">
+                <label style='padding-left:55px;'>Cocher pour supprimer</label>
+                <?php $media_paths = json_decode($home['media'], true); ?>
+                <?php foreach ($media_paths as $key => $path): ?>
+                    <input type="hidden" name="existing_media[]" value="<?php echo $path; ?>">
+                    <div class="image-container">
+                        <img src="<?php echo htmlspecialchars($path); ?>" alt="Image Actuelle"><br>
+                        <input type="checkbox" name="delete_image[]" value="<?php echo $key; ?>"> 
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <div style='padding-left:55px;' class="form-group">
+            <label for="description">Description</label>
+            <div class="input-container">
+                <textarea name="description" required><?php echo isset($home['description']) ? htmlspecialchars($home['description']) : ''; ?></textarea>
+            </div>
+        </div>
+        <div class="risk">
+            <p><a href="index.php">Retour à l'Accueil</a></p> 
+            <button type="submit">Mettre à Jour l'annonce'</button>
+        </div>
+    </form>
+
+    <?php include 'footer.php'?>
+
+    <script>
+        document.getElementById('type-select').addEventListener('change', function() {
+            var pricePeriod = document.getElementById('price-period');
+            if (this.value === 'rent') {
+                pricePeriod.classList.remove('hidden');
+            } else {
+                pricePeriod.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>

@@ -17,7 +17,7 @@
     </style>
     <div class="hero-content">
         <h1>Bienvenu à notre site immobilier</h1> 
-        <button class="explore-button" onclick="window.location.href='explore.php'">
+        <button class="explore-button" onclick="window.location.href='explorer.php'">
     Explorer
 </button>
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("connection.php");
 
 $user_id = $_SESSION['user_id'] ?? null;
@@ -16,55 +17,72 @@ $result = mysqli_query($con, $query);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Explorateur d'immobilier</title>
+    <title>Explorer les Maisons</title>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+/* Add the existing styles */
+.add-house-card {
+    display: flex; /* Flex layout */
+    flex-direction: column; /* Vertical alignment */
+    justify-content: center; /* Center align */
+    align-items: center; /* Center align */
+    border-radius: 10px; /* Rounded corners */
+    background: #f9f9f9; /* Light background */
+    cursor: pointer; /* Indicate clickability */
+    transition: background 0.3s; /* Smooth transition on hover */
+}
+
+.add-house-card:hover {
+    background: #e0e0e0; /* Darker background on hover */
+}
+.home-card-content .title{
+    margin:0px;
+}
+.plus-sign {
+    font-size: 3rem; /* Large font for the plus sign */
+    color: #555; /* Dark gray color */
+}
+
+.add-house-card a {
+    text-decoration: none; /* No underline */
+    color: #333; /* Text color */
+    text-align: center; /* Center align */
+}
+.home-card-content{
+    margin-top:-18px;
+}
+.home-card-content .price {
+    margin:0px;
+}
+    </style>
 </head>
 <body>
-    <?php include 'header.php' ?>
+    <?php include 'header.php'; ?>
+
     <div class="home-section">
-        <h2 class="home-title" style="font-size:40px;">Explorer nos immobilier</h2>
-        <div style="display:flex;">
-    <label style="padding-top:27px;padding-right:18px;" ><h3 style='color:black;'>filtrer par:</h3></label>
-    <div style="display:flex;flex-direction:column;">
-    <h4 style="display:flex;justify-content:center;">Categorie</h4>        
-    <select id="title-filter">
-        <option value="">Tous</option>
-        <?php
-        $titles_query = mysqli_query($con, "SELECT DISTINCT title FROM homes");
-        while ($title_row = mysqli_fetch_assoc($titles_query)) {
-            echo "<option value='" . htmlspecialchars($title_row['title']) . "'>" . htmlspecialchars($title_row['title']) . "</option>";
-        }
-        ?>
-    </select>
-    </div>
-    <div style="display:flex;flex-direction:column; margin-left:30px;">
-
-
-    <h4 style="display:flex;justify-content:center;" >V/L</h4>
-    <select id="type-filter" class="type-filtrer">
-        <option value="">Tous</option>
-        <option value="sell">À vendre</option>
-        <option value="rent">À louer</option>
-    </select>
-    </div>
-</div>
+        <h2 class="home-title">Explorer les Maisons</h2>
         <div class="home-grid">
-        <?php
+            <!-- "Ajouter un Bien Immobilier" card -->
+            <div class="home-card add-house-card">
+                <a href="add_home.php">
+                    <div class="plus-sign">+</div>
+                    <p>Ajouter un Bien Immobilier</p>
+                </a>
+            </div>
+            <?php
 if ($result && mysqli_num_rows($result) > 0) {
     while ($home = mysqli_fetch_assoc($result)) {
-        $is_favorited = false; // Default to false
-        if ($user_id) {
-            // Check if the current user has favorited this home
-            $favorite_check = mysqli_query($con, "SELECT COUNT(*) AS count FROM favorites WHERE user_id = '$user_id' AND home_id = '{$home['id']}'");
-            $is_favorited = (mysqli_fetch_assoc($favorite_check)['count'] > 0);
-        }
-
+        // Define $is_favorited here
+        $is_favorited = $home['is_favorited']; // Assuming it's returned in the query result
+        
         $media_files = json_decode($home['media'], true);
         echo "<div class='home-card'>";
+        
+        // Display media files
         if (!empty($media_files)) {
             echo "<div class='home-card-slider'>";
             foreach ($media_files as $file) {
@@ -80,8 +98,9 @@ if ($result && mysqli_num_rows($result) > 0) {
             echo "</div>";
         }
 
+        // Display home card content
         echo "<div class='home-card-content'>";
-        echo "<h2>" . htmlspecialchars($home['title']) . "</h2>";
+        echo "<h2 class='title'>" . htmlspecialchars($home['title']) . "</h2>";
         echo "<p class='price'>" . htmlspecialchars($home['price']) . " DA";
 
         if ($home['type'] === 'rent') {
@@ -91,10 +110,11 @@ if ($result && mysqli_num_rows($result) > 0) {
         echo "</p>";
         echo "<h3>" . htmlspecialchars($home['address']) . "</h3>";
         echo "<h3 class='type'>" . htmlspecialchars($home['type'] === 'sell' ? 'À vendre' : 'À louer') . "</h3>";
-        echo "<p>" . htmlspecialchars($home['description']) . "</p>";
-        echo "<p class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</p>";
+        echo "<p style='padding-bottom:20px;'>" . htmlspecialchars($home['description']) . "</p>";
+        echo "<h2 class='posted-by'>Posté par @" . htmlspecialchars($home['username']) . "</h2>";
         echo "</div>";
 
+        // Display home card buttons
         echo "<div class='home-card-buttons'>";
         echo "<form action='favorite_handler.php' method='POST'>";
         echo "<input type='hidden' name='home_id' value='" . htmlspecialchars($home['id']) . "'>";
@@ -111,8 +131,9 @@ if ($result && mysqli_num_rows($result) > 0) {
             echo "<a href='contact_seller.php?user_id=" . htmlspecialchars($home['user_id']) . "' class='contact-btn'><i class='fas fa-envelope'></i></a>";
         }
 
-        echo "</div>";
-        echo "</div>";
+        echo "</div>"; // End of home-card-buttons div
+
+        echo "</div>"; // End of home-card div
     }
 } else {
     echo "<p>Pas de maisons disponibles actuellement.</p>";
@@ -121,7 +142,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         </div>
     </div>
 
-    <!-- Include Slick JS -->
+    <?php include 'footer.php'; ?> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script>
     $(document).ready(function(){
@@ -159,6 +180,5 @@ if ($result && mysqli_num_rows($result) > 0) {
         });
     });
     </script>
-    <?php include 'footer.php' ?>
 </body>
 </html>

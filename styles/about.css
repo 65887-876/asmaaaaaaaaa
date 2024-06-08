@@ -6,7 +6,6 @@ body {
 }
 
 .about-section {
-    width: 100%; /* Full screen width */
     padding: 60px; /* Adequate padding */
     background: white; /* White background */
     border-radius: 10px; /* Rounded corners for smooth edges */

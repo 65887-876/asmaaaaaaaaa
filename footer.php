@@ -12,7 +12,7 @@
         <li><a href="index.php">Accueil</a></li>
 
             <li><a href="about.php">À Propos</a></li>
-            <li><a href="about.php">Nos Services</a></li>
+            <li><a href="services.php">Nos Services</a></li>
             <li><a href="my_favorites.php">Favorites</a></li>
 
         </ul>

@@ -65,10 +65,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <title>Ajouter une Maison ou une Villa</title>
     <link rel="stylesheet" href="styles/addhome.css">
     <style>
-        .footer-container{
-            margin-top:80px;
-        }
-    </style>
+    .footer-container {
+        margin-top: 80px;
+    }
+
+    /* Adjusting CSS when the period is shown */
+    #price-period.shown {
+        display: block;
+    }
+
+    /* Adjusting CSS when the period is hidden */
+    #price-period.hidden {
+        display: none;
+    }
+/* Adjusting CSS for the price input container when the period is hidden */
+#price-period.hidden:disabled ~ .form-group:nth-child(3) .input-container {
+    padding-left: 120px; /* Set padding-left to 120px when the period is hidden */
+}
+
+/* Displaying as grid when the period is hidden and disabled */
+#price-period.hidden:disabled ~ .form-group:nth-child(3) {
+    display: grid;
+    grid-template-columns: auto auto; /* Adjust grid layout as needed */
+    align-items: center;
+}
+
+</style>
+
 </head>
 <body>
 <?php include 'header.php'; ?>
@@ -76,40 +99,43 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <h1>Ajouter votre annonce</h1>
 
 <div class="container">
-    <form action="add_home.php" method="POST"  enctype="multipart/form-data">
-        <div class="form-group" style='height:50px;' >
+    <form action="add_home.php" method="POST" enctype="multipart/form-data">
+        <div class="form-group" style='height:50px;'>
             <label for="title">Type d'Annonce</label>
             <input type="text" name="title" required>
         </div>
 
-        <div class="form-group" style='padding-right:55px;height:50px;'>
-            <label for="price">Prix </label>
-            <div class="price-container">
-                <input type="text" name="price" class="price-input" required>
-            </div>
-            <select name="price_period" >
-                <option value="" disabled selected hidden>Sélectionnez une période</option>
-                <option value="total">Total</option>
-                <option value="par mois">Par mois</option>
-                <option value="par ans">Par an</option>
-            </select>
-        </div>
+        <div class="form-group" style='padding-right:225px;height:50px;'>
+    <label for="price">Prix </label>
+    <div class="price-container">
+        <input type="text" name="price" class="price-input" required>
+    </div>
+</div>
+
         <div class="form-group" style='height:50px;'>
             <label for="address">Adresse </label>
             <input type="text" name="address" required>
         </div>
 
+        <div class="lone" style='padding-left:28px;height:50px;'>
+            <label style="flex:0;" for="type">Type</label>
+            <select id="type-select" style='margin-left:24px;padding:8px' name="type" required>
+                <option value="" disabled selected hidden>Sélectionnez un type</option>
+                <option value="sell">À vendre</option>
+                <option value="rent">À louer</option>
+            </select>
+        </div>
+        <div class='form-group' style='padding-right:206px;'>
 
-        <div class="lone"   style='padding-left:28px;height:50px;'>
-    <label style="flex:0;" for="price">Type</label>
-    <select style = 'margin-left:24px;' name="type" required>
-        <option value="" disabled selected hidden>Sélectionnez un type</option>
-        <option value="sell">À vendre</option>
-        <option value="rent">À louer</option>
+        
+        <select style='padding:8px;margin:10px;' id="price-period" name="price_period">
+        <option value="" disabled selected hidden>Sélectionnez une période</option>
+        <option value="par jour">par jour</option>
+        <option value="par mois">Par mois</option>
+        <option value="par ans">Par an</option>
     </select>
-</div>
-
-        <div style='padding-right:200px; height:50px;' class="form-group file-upload">
+    </div>
+    <div style='padding-right:200px; height:50px;' class="form-group file-upload">
             <label for="media">Images</label>
             <input type="file" name="media[]" multiple accept="image/*">
         </div>
@@ -118,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <label for="description">Description</label>
             <textarea name="description" required></textarea>
         </div>
-        
+
         <div class="line">
             <p><a href="index.php">Retour à l'Accueil</a></p>
             <button type="submit" class="hey">Publier</button>
@@ -127,5 +153,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </div>
 
 <?php include 'footer.php'; ?>
+
+<script>
+    document.getElementById('type-select').addEventListener('change', function() {
+        var pricePeriod = document.getElementById('price-period');
+        if (this.value === 'rent') {
+            pricePeriod.classList.add('shown');
+            pricePeriod.classList.remove('hidden');
+        } else {
+            pricePeriod.classList.add('hidden');
+            pricePeriod.classList.remove('shown');
+        }
+    });
+</script>
 </body>
 </html>
