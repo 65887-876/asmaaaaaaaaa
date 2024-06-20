@@ -13,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $description = $_POST['description'];
     $address = $_POST['address'];
     $price = $_POST['price'];
-    $price_period = isset($_POST['price_period']) ? $_POST['price_period'] : ""; // Check if price period is set
+    $price_period = isset($_POST['price_period']) ? $_POST['price_period'] : "";
     $type = $_POST['type'];
     $media_paths = [];
 
-    if (isset($_FILES['media']) && count($_FILES['media']['name']) <= 6) {
+    if (isset($_FILES['media'])) {
         $allowed_extensions = ["jpg", "jpeg", "png", "gif", "mp4", "mov", "avi"];
         foreach ($_FILES['media']['name'] as $key => $name) {
             if ($_FILES['media']['error'][$key] === UPLOAD_ERR_OK) {
@@ -31,12 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         echo "Erreur lors du déplacement du fichier téléchargé.";
                     }
                 } else {
-                    echo "Type de fichier non valide. Veuillez télécharger une image JPG, JPEG, PNG";
+                    echo "Type de fichier non valide. Veuillez télécharger une image JPG, JPEG, PNG ou un fichier vidéo.";
                 }
             }
         }
-    } else {
-        echo "Vous pouvez télécharger jusqu'à 6 fichiers.";
     }
 
     if (!empty($title) && !empty($description) && !empty($price) && !empty($type) && !empty($address) && !empty($media_paths)) {
