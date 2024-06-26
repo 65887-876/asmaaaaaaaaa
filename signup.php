@@ -11,7 +11,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $phone = $_POST['phone'];
     $age = $_POST['age'];
 
-    if (!empty($username) && !empty($password) && !empty($email) && !empty($phone) && !empty($age)) {
+    $errors = [];
+
+    if (empty($username) || empty($password) || empty($email) || empty($phone) || empty($age)) {
+        $errors[] = 'Veuillez entrer des informations valides';
+    }
+
+    if ($age < 19) {
+        $errors[] = "Vous devez avoir au moins 19 ans pour vous inscrire.";
+    }
+
+    if (!preg_match('/^[0-9]+$/', $phone)) {
+        $errors[] = "Le numéro de téléphone doit contenir uniquement des chiffres.";
+    }
+
+    if (strlen($password) < 8) {
+        $errors[] = "Le mot de passe doit contenir au moins 8 caractères.";
+    }
+
+    if (empty($errors)) {
         $user_id = random_num(20);
 
         $query = "INSERT INTO users (user_id, username, password, email, phone, age) 
@@ -21,8 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         header("Location: login.php");
         die;
-    } else {
-        echo 'Veuillez entrer des informations valides';
     }
 }
 ?>
@@ -32,9 +48,28 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <title>Page d'inscription</title>
     <link rel="stylesheet" type="text/css" href="styles/signup.css">
+    <style>
+        .error-messages {
+            color: red;
+            text-align: center;
+        }
+        .error-messages ul {
+            list-style-type: none;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
     <h2>Inscription</h2>
+    <?php 
+    if (!empty($errors)) {
+        echo "<div class='error-messages'><ul>";
+        foreach ($errors as $error) {
+            echo "<li>$error</li>";
+        }
+        echo "</ul></div>";
+    }
+    ?>
     <form action="signup.php" method="POST"> 
         <label for="username">Nom d'utilisateur :</label>
         <input type="text" name="username" required><br>
